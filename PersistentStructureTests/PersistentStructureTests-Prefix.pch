@@ -1,0 +1,15 @@
+//
+//  PersistentStructureTests-Prefix.h
+//  PersistentStructure
+//
+//  Created by Robert Widmann on 3/27/14.
+//  Copyright (c) 2014 CodaFi. All rights reserved.
+//  Released under the MIT license.
+//
+
+#ifdef __OBJC__
+	#import <Cocoa/Cocoa.h>
+	#import <XCTest/XCTest.h>
+	#import "PersistentStructure.h"
+	#import "PersistentStructureTestDefines.h"
+#endif
