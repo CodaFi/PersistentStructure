@@ -45,10 +45,7 @@
 	} else if ([coll isKindOfClass:NSString.class]) {
 		return [[CLJStringSeq alloc] initWithString:coll];
 	} else {
-//		Class c = coll.getClass();
-//		Class sc = c.getSuperclass();
-//		throw new ExceptionInfo("Don't know how to create ISeq from: " + c.getName(),
-//								map(Keyword.intern("instance"), coll));
+		[NSException raise:NSInvalidArgumentException format:@"Dont know how to create an object conforming to CLJISeq from %@", [coll class]];
 		return nil;
 	}
 }
@@ -139,7 +136,7 @@
 //		int n = ((Number) key).intValue();
 //		return n >= 0 && n < count(coll);
 //	}
-//	throw new IllegalArgumentException("contains? not supported on type: " + coll.getClass().getName());
+	[NSException raise:NSInvalidArgumentException format:@"CLJContains not supported on collection %@", [coll class]];
 	return NO;
 }
 

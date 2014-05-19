@@ -8,6 +8,7 @@
 //
 
 #import "CLJPersistentVector.h"
+#import "CLJPersistentVectorIterator.h"
 #import "CLJISeq.h"
 #import "CLJITransientVector.h"
 #import "CLJITransientCollection.h"
@@ -251,31 +252,9 @@ static CLJPersistentVector *EMPTY = nil;
 	return self.chunkedSeq;
 }
 
-//Iterator rangedIterator(final NSInteger start, final NSInteger end){
-//	return new Iterator(){
-//		NSInteger i = start;
-//		NSInteger base = i - (i%32);
-//		CLJArray array = (start < count())?arrayfor (i):null;
-//		
-//		public boolean hasNext(){
-//			return i < end;
-//		}
-//		
-//		public Object next(){
-//			if (i-base == 32){
-//				array = arrayfor (i);
-//				base += 32;
-//			}
-//			return array[i++ & 0x01f];
-//		}
-//		
-//		public void remove(){
-//			throw new UnsupportedOperationException();
-//		}
-//	};
-//}
-
-//public Iterator iterator(){return rangedIterator(0,count());}
+- (NSEnumerator *)objectEnumerator {
+	return [[CLJPersistentVectorIterator alloc] initWithVector:self start:0];
+}
 
 - (id)kvreduce:(CLJIKeyValueReduceBlock)f init:(id)init {
 	NSInteger step = 0;

@@ -35,37 +35,6 @@ static CLJEmptyList *_CLJSingletonEmptyList = nil;
 	_CLJSingletonEmptyList = [[CLJEmptyList alloc] initWithMeta:nil];
 }
 
-//public static IFn creator = new RestFn(){
-//	final public NSInteger getRequiredArity(){
-//		return 0;
-//	}
-//	
-//	final protected Object doInvoke(Object args) {
-//		if (args instanceof ArraySeq)
-//		{
-//			Object[] argsarray = (Object[]) ((ArraySeq) args).array;
-//			IPersistentList ret = EMPTY;
-//			for (NSInteger i = argsarray.length - 1; i >= 0; --i)
-//				ret = (IPersistentList) ret.cons(argsarray[i]);
-//			return ret;
-//		}
-//		LinkedList list = new LinkedList();
-//		for (ISeq s = RT.seq(args); s != null; s = s.next())
-//			list.add(s.first());
-//		return create(list);
-//	}
-//	
-//	public IObj withMeta(IPersistentMap meta){
-//		throw new UnsupportedOperationException();
-//	}
-//	
-//	public IPersistentMap meta(){
-//		return null;
-//	}
-//};
-//
-//final public static EmptyList EMPTY = new EmptyList(null);
-
 + (id<CLJIPersistentCollection>)empty {
 	return _CLJSingletonEmptyList;
 }
@@ -91,12 +60,13 @@ static CLJEmptyList *_CLJSingletonEmptyList = nil;
 }
 
 + (id<CLJIPersistentList>)create:(id<CLJIList>)init {
-//	id <CLJIPersistentList> ret = (id <CLJIPersistentList>)CLJPersistentList.empty;
-//	for (ListIterator i = init.listIterator(init.size); init.hasPrevious;) {
-//		ret = (id<CLJIPersistentList>)[ret cons:i.previous];
-//	}
-//	return ret;
-	return nil;
+	id <CLJIPersistentList> ret = (id <CLJIPersistentList>)CLJPersistentList.empty;
+	NSEnumerator *it = [init objectEnumerator];
+	id obj = nil;
+	while ((obj = it.nextObject) != nil) {
+		ret = (id<CLJIPersistentList>)[ret cons:obj];
+	}
+	return ret;
 }
 
 - (id)first {
