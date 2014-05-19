@@ -8,7 +8,7 @@ A work in progress direct port of Clojure's persistent data structures to Object
 libPersistentStructure is packaged as a static library for both iOS and OS X, so
 there are two ways of incorporating it into an application.
 
-1) Add the NUIKit as a subproject of your own project.
+1) Add PersistentStructure as a subproject of your own project.
 
 - Drag PersistentStructure.xcodeproj into your project file tree.
 - Click on your project in the file tree; select `Build Phases`
