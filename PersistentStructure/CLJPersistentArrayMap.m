@@ -71,10 +71,10 @@ static CLJPersistentArrayMap *EMPTY;
 }
 
 + (CLJPersistentArrayMap *)createWithCheck:(CLJArray)init {
-	for (int i=0;i< init.length;i += 2) {
-		for (int j=i+2;j<init.length;j += 2) {
+	for (NSUInteger i = 0;i< init.length;i += 2) {
+		for (NSUInteger j = i + 2; j < init.length; j += 2) {
 			if ([CLJPersistentArrayMap equalKey:init.array[i] other:init.array[j]]) {
-				@throw [NSException exceptionWithName:@"IllegalArgumentException" reason:@"Duplicate key: + init[i]" userInfo:nil];
+				[NSException raise:NSInvalidArgumentException format:@"Duplicate key found at index %tu", i];
 			}
 		}
 	}
@@ -101,7 +101,7 @@ static CLJPersistentArrayMap *EMPTY;
 	NSInteger i = [self indexOf:key];
 	CLJArray newArray;
 	if (i >= 0) {
-//		throw Util.runtimeException("Key already present");
+		[NSException raise:NSInternalInconsistencyException format:@"Key %@ already present in array map %@", key, self];
 	}
 	else { //didn't have key, grow
 		if (_array.length > HASHTABLE_THRESHOLD) {
@@ -148,7 +148,7 @@ static CLJPersistentArrayMap *EMPTY;
 			return (id<CLJIPersistentMap>)self.empty;
 		}
 		CLJArray newArray = CLJArrayCreate(newlen);
-		for (int s = 0, d = 0; s < _array.length; s += 2) {
+		for (NSUInteger s = 0, d = 0; s < _array.length; s += 2) {
 			if (![CLJPersistentArrayMap equalKey:_array.array[s] other:key]) { //skip removal key
 				newArray.array[d] = _array.array[s];
 				newArray.array[d + 1] = _array.array[s + 1];

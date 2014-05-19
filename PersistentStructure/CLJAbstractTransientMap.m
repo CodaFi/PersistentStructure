@@ -30,7 +30,7 @@
 	} else if ([o conformsToProtocol:@protocol(CLJIPersistentVector)]) {
 		id<CLJIPersistentVector> v = (id<CLJIPersistentVector>) o;
 		if (v.count != 2) {
-			[NSException raise:@"" format:@"Vector arg to map conj must be a pair"];
+			[NSException raise:NSInvalidArgumentException format:@"Vector arg to map conj: must be a pair"];
 		}
 		return [self associateKey:[v nth:0] value:[v nth:1]];
 	}

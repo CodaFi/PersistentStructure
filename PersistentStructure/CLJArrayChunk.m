@@ -51,7 +51,7 @@
 
 - (id<CLJIChunk>)tail {
 	if (_off==_end) {
-		@throw [NSException exceptionWithName:@"IllegalStateException" reason:@"tail of empty chunk" userInfo:nil];
+		[NSException raise:NSInternalInconsistencyException format:@"Cannot request tail of empty chunk."];
 	}
 	return [[CLJArrayChunk alloc] initWithArray:_array offset:_off + 1 end:_end];
 }

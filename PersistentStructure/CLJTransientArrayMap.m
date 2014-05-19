@@ -34,7 +34,7 @@ static const NSInteger HASHTABLE_THRESHOLD = 16;
 }
 
 - (NSInteger)indexOf:(id)key {
-	for (int i = 0; i < _length; i += 2) {
+	for (NSUInteger i = 0; i < _length; i += 2) {
 		if ([CLJTransientArrayMap equalKey:_array.array[i] other:key]) {
 			return i;
 		}
@@ -102,9 +102,9 @@ static const NSInteger HASHTABLE_THRESHOLD = 16;
 		return;
 	}
 	if (_owner != nil) {
-		@throw [NSException exceptionWithName:@"IllegalAccessError" reason:@"Transient used by non-owner thread" userInfo:nil];
+		[NSException raise:NSInternalInconsistencyException format:@"Transient used by non-owner thread"];
 	}
-	@throw [NSException exceptionWithName:@"IllegalAccessError" reason:@"Transient used after persistent! call" userInfo:nil];
+	[NSException raise:NSInternalInconsistencyException format:@"Transient used after call to be made persistent"];
 }
 
 @end

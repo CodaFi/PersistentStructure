@@ -128,7 +128,8 @@ static CLJPersistentVector *EMPTY = nil;
 		}
 		return node.array;
 	}
-	@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:@"" userInfo:nil];
+	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
+	return (CLJArray){};
 }
 
 - (id)nth:(NSInteger)i {
@@ -156,7 +157,8 @@ static CLJPersistentVector *EMPTY = nil;
 	if (i == _count) {
 		return [self cons:val];
 	}
-	@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:@"" userInfo:nil];
+	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
+	return nil;
 }
 
 + (CLJNode *)doAssocAtLevel:(NSInteger)level node:(CLJNode *)node index:(NSInteger)i value:(id)val {
@@ -296,7 +298,7 @@ static CLJPersistentVector *EMPTY = nil;
 
 - (id<CLJIPersistentStack>)pop {
 	if (_count == 0) {
-		@throw [NSException exceptionWithName:@"IllegalStateException" reason:@"Can't pop empty vector" userInfo:nil];
+		[NSException raise:NSInternalInconsistencyException format:@"Can't pop from an empty vector"];
 	}
 	if (_count == 1) {
 		return (id<CLJIPersistentStack>)[EMPTY withMeta:self.meta];

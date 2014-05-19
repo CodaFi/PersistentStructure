@@ -8,6 +8,7 @@
 //
 
 #import "CLJLazySeq.h"
+#import "CLJAbstractObject.h"
 #import "CLJPersistentList.h"
 #import "CLJICollection.h"
 #import "CLJISeq.h"
@@ -180,7 +181,8 @@
 }
 
 - (id)set:(NSInteger)index element:(id)element {
-	@throw [NSException exceptionWithName:@"CLJUnsupportedOperationException" reason:@"" userInfo:nil];
+	CLJRequestConcreteImplementation(self, _cmd, Nil);
+	return nil;
 }
 
 - (NSInteger)indexOf:(id)o {

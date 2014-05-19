@@ -188,7 +188,7 @@ static id _CLJNOT_FOUND = nil;
 
 - (id<CLJIPersistentMap>)assocEx:(id)key value:(id)val {
 	if ([self containsKey:key]) {
-		@throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Key already present" userInfo:nil];
+		[NSException raise:NSInternalInconsistencyException format:@"Key %@ already present in hash map %@", key, self];
 	}
 	return [self associateKey:key value:val];
 }

@@ -8,6 +8,7 @@
 //
 
 #import "CLJAbstractPersistentMap.h"
+#import "CLJAbstractObject.h"
 #import "CLJInterfaces.h"
 #import "CLJAbstractSeq.h"
 #import "CLJKeySeq.h"
@@ -209,11 +210,12 @@
 }
 
 - (id)put:(id)key with:(id)value {
-	@throw [NSException exceptionWithName:@"CLJUnsupportedOperationException" reason:@"" userInfo:nil];
+	CLJRequestConcreteImplementation(self, _cmd, Nil);
+	return nil;
 }
 
 - (void)putAll:(id<CLJIMap>)m {
-	@throw [NSException exceptionWithName:@"CLJUnsupportedOperationException" reason:@"" userInfo:nil];
+	CLJRequestConcreteImplementation(self, _cmd, Nil);
 }
 
 

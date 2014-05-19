@@ -24,7 +24,7 @@
 
 - (id)nextObject {
 	if (_seq == nil) {
-		@throw [NSException exceptionWithName:@"NoSuchElementException" reason:nil userInfo:nil];
+		[NSException raise:NSInternalInconsistencyException format:@"Cannot request next object of empty seq."];
 	}
 	id ret = [CLJUtils first:_seq];
 	_seq = [CLJUtils next:_seq];

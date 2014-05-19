@@ -42,14 +42,14 @@
 
 - (id)nth:(NSInteger)i {
 	if ((_start + i >= _end) || (i < 0)) {
-		@throw [NSException exceptionWithName:NSRangeException reason:@"" userInfo:nil];
+		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	}
 	return [_v nth:_start + i];
 }
 
 - (id<CLJIPersistentVector>)assocN:(NSInteger)i value:(id)val {
 	if (_start + i > _end) {
-		@throw [NSException exceptionWithName:NSRangeException reason:@"" userInfo:nil];
+		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	} else if (_start + i == _end) {
 		return (id<CLJIPersistentVector>)[self cons:val];
 	}

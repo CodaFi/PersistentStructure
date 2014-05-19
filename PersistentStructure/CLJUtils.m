@@ -8,6 +8,7 @@
 //
 
 #import "CLJUtils.h"
+#import "CLJAbstractObject.h"
 #import "CLJInterfaces.h"
 #import "CLJAbstractSeq.h"
 #import "CLJLazySeq.h"
@@ -93,9 +94,9 @@
 }
 
 + (NSInteger)countFrom:(id)o {
-	if (o == nil)
+	if (o == nil) {
 		return 0;
-	else if ([o conformsToProtocol:@protocol(CLJIPersistentCollection) ]) {
+	} else if ([o conformsToProtocol:@protocol(CLJIPersistentCollection) ]) {
 		id<CLJISeq> s = [CLJUtils seq:o];
 		o = nil;
 		NSInteger i = 0;
@@ -105,17 +106,19 @@
 			i++;
 		}
 		return i;
-	}
-	else if ([o respondsToSelector:@selector(length)])
+	} else if ([o respondsToSelector:@selector(length)]) {
 		return [o length];
+	}
 //	else if (o instanceof Collection)
 //		return ((Collection) o).size();
 //	else if (o instanceof Map)
 //		return ((Map) o).size();
-	else if ([o respondsToSelector:@selector(count)])
+	else if ([o respondsToSelector:@selector(count)]) {
 		return [o count];
+	}
 	
-	@throw [NSException exceptionWithName:@"UnsupportedOperationException" reason:@"count not supported on this type: + o.getClass().getSimpleName()" userInfo:nil];
+	CLJRequestConcreteImplementation(o, @selector(count), [o class]);
+	return -1;
 }
 
 + (BOOL)containsObject:(id)coll key:(id)key {
@@ -161,7 +164,7 @@
 		} else if (n == 1) {
 			return e.val;
 		}
-		@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:nil userInfo:nil];
+		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	} else if ([coll conformsToProtocol:@protocol(CLJISequential)]) {
 		id<CLJISeq> seq = [CLJUtils seq:coll];
 		coll = nil;
@@ -169,10 +172,11 @@
 			if (i == n)
 				return seq.first;
 		}
-		@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:nil userInfo:nil];
+		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	} else {
-		@throw [NSException exceptionWithName:@"CLJUnsupportedOperationException" reason:@"" userInfo:nil];
+		CLJRequestConcreteImplementation(coll, @selector(nthFrom:index:), [coll class]);
 	}
+	return nil;
 }
 
 + (id<CLJISeq>)cons:(id)x to:(id)coll {
@@ -194,7 +198,7 @@
 
 + (id<CLJIPersistentVector>)subvecOf:(id<CLJIPersistentVector>)v start:(NSInteger)start end:(NSInteger)end {
 	if (end < start || start < 0 || end > v.count) {
-		@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:nil userInfo:nil];
+		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	}
 	if (start == end) {
 		return CLJPersistentVector.empty;
@@ -345,7 +349,6 @@
 		}];
 	}
 	CLJBox *addedLeaf = [CLJBox boxWithVal:nil];
-	//AtomicReference<Thread> edit = new AtomicReference<Thread>();
 	NSThread *edit = NSThread.currentThread;
 	return [[CLJBitmapIndexedNode.empty assocOnThread:edit shift:shift hash:key1hash key:key1 val:val1 addedLeaf:addedLeaf] assocOnThread:edit shift:shift hash:key2hash key:key2 val:val2 addedLeaf:addedLeaf];
 }
@@ -353,8 +356,10 @@
 + (id<CLJINode>)createNodeOnThread:(NSThread *)edit shift:(NSInteger)shift key:(id)key1 value:(id)val1 hash:(NSInteger)key2hash key:(id)key2 value:(id)val2 {
 	NSInteger key1hash = [self hash:key1];
 	if (key1hash == key2hash) {
+		__strong id arr[] = { key1, val1, key2, val2 };
 		return [[CLJHashCollisionNode alloc] initWithThread:nil hash:key1hash count:2 array:(CLJArray){
-			//{key1, val1, key2, val2})
+			.array = arr,
+			.length = 4,
 		}];
 	}
 	CLJBox *addedLeaf = [CLJBox boxWithVal:nil];

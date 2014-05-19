@@ -24,7 +24,7 @@ static CLJPersistentHashSet *EMPTY;
 
 + (CLJPersistentHashSet *)createWithArray:(CLJArray)init {
 	CLJPersistentHashSet * ret = EMPTY;
-	for (int i = 0; i < init.length; i++) {
+	for (NSUInteger i = 0; i < init.length; i++) {
 		ret = (CLJPersistentHashSet *)[ret cons:init.array[i]];
 	}
 	return ret;
@@ -48,22 +48,22 @@ static CLJPersistentHashSet *EMPTY;
 
 + (CLJPersistentHashSet *)createWithCheckArray:(CLJArray)init {
 	CLJPersistentHashSet * ret = EMPTY;
-	for (int i = 0; i < init.length; i++) {
+	for (NSUInteger i = 0; i < init.length; i++) {
 		ret = (CLJPersistentHashSet *)[ret cons:init.array[i]];
 		if (ret.count != i + 1) {
-			@throw [NSException exceptionWithName:@"IllegalArgumentException" reason:@"Duplicate key: + init.array[i]" userInfo:nil];
+			[NSException raise:NSInvalidArgumentException format:@"Duplicate key at index %tu", i];
 		}
 	}
 	return ret;
 }
 
 + (CLJPersistentHashSet *)createWithCheckList:(id<CLJIList>)init {
-	int i = 0;
+	NSUInteger i = 0;
 	CLJPersistentHashSet * ret = EMPTY;
 	for (id key in init) {
 		ret = (CLJPersistentHashSet *)[ret cons:key];
 		if (ret.count != i + 1) {
-			@throw [NSException exceptionWithName:@"IllegalArgumentException" reason:@"Duplicate key: + init.array[i]" userInfo:nil];
+			[NSException raise:NSInvalidArgumentException format:@"Duplicate key at index %tu", i];
 		}
 		++i;
 	}
@@ -72,10 +72,10 @@ static CLJPersistentHashSet *EMPTY;
 
 + (CLJPersistentHashSet *)createWithCheckSeq:(id<CLJISeq>)items {
 	CLJPersistentHashSet *ret = EMPTY;
-	for (int i=0; items != nil; items = items.next, ++i) {
+	for (NSUInteger i = 0; items != nil; items = items.next, ++i) {
 		ret = (CLJPersistentHashSet *)[ret cons:items.first];
 		if (ret.count != i + 1) {
-			@throw [NSException exceptionWithName:@"IllegalArgumentException" reason:@"Duplicate key: + init.array[i]" userInfo:nil];
+			[NSException raise:NSInvalidArgumentException format:@"Duplicate key at index %tu", i];
 		}
 	}
 	return ret;

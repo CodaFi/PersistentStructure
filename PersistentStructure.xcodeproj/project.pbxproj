@@ -48,6 +48,9 @@
 		84117DF019297E4D00DC1430 /* CLJReduced.m in Sources */ = {isa = PBXBuildFile; fileRef = C931B7BC1872B56900CFC336 /* CLJReduced.m */; };
 		84117DF119297E4D00DC1430 /* CLJSubVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 847C079B18E3A134008F027F /* CLJSubVector.m */; };
 		84117DF219297E4D00DC1430 /* CLJUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C931B76C1871521400CFC336 /* CLJUtils.m */; };
+		84117DF81929819300DC1430 /* CLJAbstractObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 84117DF71929819300DC1430 /* CLJAbstractObject.h */; };
+		84117DFA192981BB00DC1430 /* CLJAbstractObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 84117DF9192981BB00DC1430 /* CLJAbstractObject.m */; };
+		84117DFB192981BB00DC1430 /* CLJAbstractObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 84117DF9192981BB00DC1430 /* CLJAbstractObject.m */; };
 		844DB9DC18F78CC700A4412D /* CLJDataStructuresSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 844DB9DB18F78CC700A4412D /* CLJDataStructuresSpec.m */; };
 		845858EA18DEA2A9002E342B /* CLJLazilyPersistentVector.h in Headers */ = {isa = PBXBuildFile; fileRef = 845858E818DEA2A9002E342B /* CLJLazilyPersistentVector.h */; };
 		845858EB18DEA2A9002E342B /* CLJLazilyPersistentVector.m in Sources */ = {isa = PBXBuildFile; fileRef = 845858E918DEA2A9002E342B /* CLJLazilyPersistentVector.m */; };
@@ -203,6 +206,8 @@
 		84117DA719297E2A00DC1430 /* libPersistentStructure-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPersistentStructure-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84117DA819297E2A00DC1430 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		84117DB819297E2A00DC1430 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		84117DF71929819300DC1430 /* CLJAbstractObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJAbstractObject.h; sourceTree = "<group>"; };
+		84117DF9192981BB00DC1430 /* CLJAbstractObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJAbstractObject.m; sourceTree = "<group>"; };
 		844DB9DB18F78CC700A4412D /* CLJDataStructuresSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CLJDataStructuresSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		845858E818DEA2A9002E342B /* CLJLazilyPersistentVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CLJLazilyPersistentVector.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		845858E918DEA2A9002E342B /* CLJLazilyPersistentVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJLazilyPersistentVector.m; sourceTree = "<group>"; };
@@ -476,6 +481,8 @@
 				847C079B18E3A134008F027F /* CLJSubVector.m */,
 				C931B76B1871521400CFC336 /* CLJUtils.h */,
 				C931B76C1871521400CFC336 /* CLJUtils.m */,
+				84117DF71929819300DC1430 /* CLJAbstractObject.h */,
+				84117DF9192981BB00DC1430 /* CLJAbstractObject.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -654,6 +661,7 @@
 				847C07A418E5197B008F027F /* CLJRVecSeq.h in Headers */,
 				C931B7B51872B02600CFC336 /* CLJMapEntry.h in Headers */,
 				847C077218E2A2C8008F027F /* CLJArray.h in Headers */,
+				84117DF81929819300DC1430 /* CLJAbstractObject.h in Headers */,
 				C931B783187170A700CFC336 /* CLJPersistentList.h in Headers */,
 				847C07DD18E65E51008F027F /* CLJITransientSet.h in Headers */,
 				847C078118E2BA42008F027F /* CLJTransientVector.h in Headers */,
@@ -850,6 +858,7 @@
 				84117DE319297E4D00DC1430 /* CLJKeySeq.m in Sources */,
 				84117DE419297E4D00DC1430 /* CLJValSeq.m in Sources */,
 				84117DE519297E4D00DC1430 /* CLJNodeSeq.m in Sources */,
+				84117DFB192981BB00DC1430 /* CLJAbstractObject.m in Sources */,
 				84117DE619297E4D00DC1430 /* CLJLazySeq.m in Sources */,
 				84117DE719297E4D00DC1430 /* CLJVecSeq.m in Sources */,
 				84117DE819297E4D00DC1430 /* CLJRVecSeq.m in Sources */,
@@ -897,6 +906,7 @@
 				847C07B718E52AFF008F027F /* CLJCore.m in Sources */,
 				847C07DB18E65E25008F027F /* CLJAbstractTransientSet.m in Sources */,
 				C931B77E1871637300CFC336 /* CLJAbstractCons.m in Sources */,
+				84117DFA192981BB00DC1430 /* CLJAbstractObject.m in Sources */,
 				847C07BD18E53586008F027F /* CLJPersistentArrayMap.m in Sources */,
 				847C076E18E29D73008F027F /* CLJNodeSeq.m in Sources */,
 				C931B7981872291C00CFC336 /* CLJBox.m in Sources */,

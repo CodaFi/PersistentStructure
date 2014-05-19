@@ -19,8 +19,9 @@
 	} else if (i == 1) {
 		return self.val;
 	} else {
-		@throw [NSException exceptionWithName:NSRangeException reason:@"" userInfo:nil];
+		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	}
+	return nil;
 }
 
 - (id<CLJIPersistentVector>)asVector {

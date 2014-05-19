@@ -106,9 +106,9 @@
 		return;
 	}
 	if (_edit != nil) {
-		@throw [NSException exceptionWithName:@"IllegalAccessError" reason:@"Transient used by non-owner thread" userInfo:nil];
+		[NSException raise:NSInternalInconsistencyException format:@"Transient used by non-owner thread"];
 	}
-	@throw [NSException exceptionWithName:@"IllegalAccessError" reason:@"Transient used after persistent! call" userInfo:nil];
+	[NSException raise:NSInternalInconsistencyException format:@"Transient used by call to be persistent"];
 }
 
 @end

@@ -21,10 +21,12 @@
 
 - (id)initWithCount:(NSInteger)cnt shift:(NSInteger)shift node:(CLJNode *)root tail:(CLJArray)tail {
 	self = [super init];
+	
 	_cnt = cnt;
 	_shift = shift;
 	_root = root;
 	_tail = tail;
+	
 	return self;
 }
 
@@ -45,11 +47,13 @@
 
 - (void)ensureEditable {
 	NSThread *owner = _root.edit;
-	if (owner == NSThread.currentThread)
+	if (owner == NSThread.currentThread) {
 		return;
-	if (owner != nil)
-		@throw [NSException exceptionWithName:@"IllegalAccessError" reason:@"Transient used by non-owner thread" userInfo:nil];
-	@throw [NSException exceptionWithName:@"IllegalAccessError" reason:@"Transient used after persistent! call" userInfo:nil];
+	}
+	if (owner != nil) {
+		[NSException raise:NSInternalInconsistencyException format:@"Transient used by non-owner thread"];
+	}
+	[NSException raise:NSInternalInconsistencyException format:@"Transient used after request to be made persistent"];
 }
 
 - (CLJNode *)editableRoot:(CLJNode *)node {
@@ -148,7 +152,8 @@
 			node = (CLJNode *) node.array.array[ (i >> level) & 0x01f];
 		return node.array;
 	}
-	@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:@"" userInfo:nil];
+	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
+	return (CLJArray){};
 }
 
 - (CLJArray)editableArrayFor:(NSInteger)i {
@@ -160,7 +165,8 @@
 			node = (CLJNode *) node.array.array[(i >> level) & 0x01f];
 		return node.array;
 	}
-	@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:@"" userInfo:nil];
+	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
+	return (CLJArray){};
 }
 
 - (id)valAt:(id)key {
@@ -177,13 +183,6 @@
 	}
 	return notFound;
 }
-
-//public Object invoke(Object arg1) {
-//	//note - relies on ensureEditable in nth
-//	if (Util.isInteger(arg1))
-//		return nth(((Number) arg1).intValue());
-//	throw new IllegalArgumentException("Key must be integer");
-//}
 
 - (id)nth:(NSInteger)i {
 	[self ensureEditable];
@@ -210,7 +209,8 @@
 	}
 	if (i == _cnt)
 		return (id<CLJITransientVector>)[self conj:val];
-	@throw [NSException exceptionWithName:@"IndexOutOfBoundsException" reason:@"" userInfo:nil];
+	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
+	return nil;
 }
 
 - (id<CLJITransientAssociative>)associateKey:(id)key value:(id)val {
@@ -219,7 +219,8 @@
 		NSInteger i = ((NSNumber *) key).intValue;
 		return [self assocN:i value:val];
 	}
-	@throw [NSException exceptionWithName:@"IllegalArgumentException" reason:@"Key must be integer" userInfo:nil];
+	[NSException raise:NSInvalidArgumentException format:@"Key must be an integer"];
+	return nil;
 }
 
 - (CLJNode *)doAssocAtLevel:(NSInteger)level node:(CLJNode *)node index:(NSInteger)i value:(id)val {
@@ -227,9 +228,7 @@
 	CLJNode *ret = node;
 	if (level == 0) {
 		ret.array.array[i & 0x01f] = val;
-	}
-	else
-	{
+	} else {
 		NSInteger subidx = (i >> level) & 0x01f;
 		ret.array.array[subidx] = [self doAssocAtLevel:level - 5 node:(CLJNode *)node.array.array[subidx] index:i value:val];
 	}
@@ -238,8 +237,9 @@
 
 - (id<CLJITransientVector>)pop {
 	[self ensureEditable];
-	if (_cnt == 0)
-		@throw [NSException exceptionWithName:@"IllegalStateException" reason:@"Can't pop empty vector" userInfo:nil];
+	if (_cnt == 0) {
+		[NSException raise:NSInternalInconsistencyException format:@"Can't pop from an empty vector"];
+	}
 	if (_cnt == 1) {
 		_cnt = 0;
 		return self;
@@ -274,19 +274,16 @@
 	NSInteger subidx = ((_cnt - 2) >> level) & 0x01f;
 	if (level > 5) {
 		CLJNode *newchild = [self popTailAtLevel:level - 5 node:(CLJNode *)node.array.array[subidx]];
-		if (newchild == nil && subidx == 0)
+		if (newchild == nil && subidx == 0) {
 			return nil;
-		else
-		{
+		} else {
 			CLJNode *ret = node;
 			ret.array.array[subidx] = newchild;
 			return ret;
 		}
-	}
-	else if (subidx == 0)
+	} else if (subidx == 0) {
 		return nil;
-	else
-	{
+	} else {
 		CLJNode * ret = node;
 		ret.array.array[subidx] = nil;
 		return ret;

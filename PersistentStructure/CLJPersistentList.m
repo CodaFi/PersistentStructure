@@ -8,6 +8,7 @@
 //
 
 #import "CLJPersistentList.h"
+#import "CLJAbstractObject.h"
 #import "CLJICollection.h"
 #import "CLJIPersistentMap.h"
 #import "CLJIPersistentList.h"
@@ -271,7 +272,8 @@ static CLJEmptyList *_CLJSingletonEmptyList = nil;
 }
 
 - (id)set:(NSInteger)index element:(id)element {
-	@throw [NSException exceptionWithName:@"CLJUnsupportedOperationException" reason:@"" userInfo:nil];
+	CLJRequestConcreteImplementation(self, _cmd, Nil);
+	return nil;
 }
 
 - (NSInteger)indexOf:(id)o {
