@@ -8,6 +8,7 @@
 //
 
 #import "CLJPersistentVector.h"
+#import "CLJVectorListIterator.h"
 #import "CLJAbstractObject.h"
 #import "CLJIPersistentCollection.h"
 #import "CLJISeq.h"
@@ -180,52 +181,6 @@
 	return -1;
 }
 
-//public ListIterator listIterator(){
-//	return listIterator(0);
-//}
-//
-//public ListIterator listIterator(final NSInteger index){
-//	return new ListIterator(){
-//		NSInteger nexti = index;
-//		
-//		public boolean hasNext(){
-//			return nexti < count();
-//		}
-//		
-//		public Object next(){
-//			return nth(nexti++);
-//		}
-//		
-//		public boolean hasPrevious(){
-//			return nexti > 0;
-//		}
-//		
-//		public Object previous(){
-//			return nth(--nexti);
-//		}
-//		
-//		public NSInteger nextIndex(){
-//			return nexti;
-//		}
-//		
-//		public NSInteger previousIndex(){
-//			return nexti - 1;
-//		}
-//		
-//		public void remove(){
-//			throw new UnsupportedOperationException();
-//		}
-//		
-//		public void set(Object o){
-//			throw new UnsupportedOperationException();
-//		}
-//		
-//		public void add(Object o){
-//			throw new UnsupportedOperationException();
-//		}
-//	};
-//}
-
 - (id<CLJIList>)subListFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
 	return (id<CLJIList>)[CLJUtils subvecOf:self start:fromIndex end:toIndex];
 }
@@ -234,25 +189,6 @@
 	CLJRequestConcreteImplementation(self, _cmd, Nil);
 	return nil;
 }
-
-//public Iterator iterator(){
-//	//todo - something more efficient
-//	return new Iterator(){
-//		NSInteger i = 0;
-//		
-//		public boolean hasNext(){
-//			return i < count();
-//		}
-//		
-//		public Object next(){
-//			return nth(i++);
-//		}
-//		
-//		public void remove(){
-//			throw new UnsupportedOperationException();
-//		}
-//	};
-//}
 
 - (id)peek {
 	if (self.count > 0) {
@@ -378,7 +314,7 @@
 }
 
 - (NSEnumerator *)objectEnumerator {
-	return nil;
+	return [[CLJVectorListIterator alloc] initWithVector:self index:0];
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len {

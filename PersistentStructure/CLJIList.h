@@ -21,8 +21,6 @@
 - (BOOL)isEmpty;
 - (NSEnumerator *)objectEnumerator;
 - (NSInteger)lastIndexOf:(id)o;
-//ListIterator	listIterator()
-//ListIterator	listIterator(NSInteger index)
 - (id)set:(NSInteger)index element:(id)element;
 - (NSUInteger)count;
 - (id<CLJIList>)subListFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
