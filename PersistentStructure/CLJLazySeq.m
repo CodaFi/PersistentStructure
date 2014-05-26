@@ -191,7 +191,7 @@
 		if ([CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(o)])
 			return i;
 	}
-	return -1;
+	return NSNotFound;
 }
 
 - (NSInteger)lastIndexOf:(id)o {

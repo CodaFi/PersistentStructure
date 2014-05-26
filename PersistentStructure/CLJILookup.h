@@ -8,6 +8,6 @@
 //
 
 @protocol CLJILookup <NSObject>
-- (id)valAt:(id)key;
-- (id)valAt:(id)key default:(id)notFound;
+- (id)objectForKey:(id)key;
+- (id)objectForKey:(id)key default:(id)notFound;
 @end

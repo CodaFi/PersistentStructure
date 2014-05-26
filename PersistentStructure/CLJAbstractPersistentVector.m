@@ -169,7 +169,7 @@
 			return i;
 		}
 	}
-	return -1;
+	return NSNotFound;
 }
 
 - (NSInteger)lastIndexOf:(id)o {
@@ -178,7 +178,7 @@
 			return i;
 		}
 	}
-	return -1;
+	return NSNotFound;
 }
 
 - (id<CLJIList>)subListFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
@@ -205,7 +205,7 @@
 	return i >= 0 && i < self.count;
 }
 
-- (id<CLJIMapEntry>)objectForKey:(id)key {
+- (id<CLJIMapEntry>)entryForKey:(id)key {
 	if (![CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).integerValue;
 		if (i >= 0 && i < self.count) {
@@ -224,7 +224,7 @@
 	return nil;
 }
 
-- (id)valAt:(id)key default:(id)notFound {
+- (id)objectForKey:(id)key default:(id)notFound {
 	if ([CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).integerValue;
 		if (i >= 0 && i < self.count) {
@@ -234,8 +234,8 @@
 	return notFound;
 }
 
-- (id)valAt:(id)key {
-	return [self valAt:key default:nil];
+- (id)objectForKey:(id)key {
+	return [self objectForKey:key default:nil];
 }
 
 // java.util.Collection implementation
@@ -277,9 +277,9 @@
 - (NSComparisonResult)compareTo:(id)o {
 	id<CLJIPersistentVector> v = (id<CLJIPersistentVector>) o;
 	if (self.count < v.count) {
-		return -1;
+		return NSOrderedAscending;
 	} else if (self.count > v.count) {
-		return 1;
+		return NSOrderedDescending;
 	}
 	
 	for (NSInteger i = 0; i < self.count; i++) {

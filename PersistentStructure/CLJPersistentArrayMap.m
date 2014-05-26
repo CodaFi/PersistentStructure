@@ -89,7 +89,7 @@ static CLJPersistentArrayMap *EMPTY;
 	return [self indexOf:key] >= 0;
 }
 
-- (id<CLJIMapEntry>)objectForKey:(id)key {
+- (id<CLJIMapEntry>)entryForKey:(id)key {
 	NSInteger i = [self indexOf:key];
 	if (i >= 0) {
 		return [[CLJMapEntry alloc] initWithKey:_array.array[i] val:_array.array[i + 1]];
@@ -165,15 +165,16 @@ static CLJPersistentArrayMap *EMPTY;
 	return (id<CLJIPersistentMap>)[EMPTY withMeta:self.meta];
 }
 
-- (id)valAt:(id)key default:(id)notFound {
+- (id)objectForKey:(id)key default:(id)notFound {
 	NSInteger i = [self indexOf:key];
-	if (i >= 0)
+	if (i >= 0) {
 		return _array.array[i + 1];
+	}
 	return notFound;
 }
 
-- (id)valAt:(id)key {
-	return [self valAt:key default:nil];
+- (id)objectForKey:(id)key {
+	return [self objectForKey:key default:nil];
 }
 
 - (NSUInteger)capacity {
@@ -181,26 +182,15 @@ static CLJPersistentArrayMap *EMPTY;
 }
 
 - (NSInteger)indexOfObject:(id)key {
-//    Util.EquivPred ep = Util.equivPred(key);
-//    for (int i = 0; i < _array.length; i += 2)
-//	{
-//        if (ep.equiv(key, _array.array[i]))
-//            return i;
-//	}
-	return -1;
+    for (int i = 0; i < _array.length; i += 2) {
+        if ([_array.array[i] isEqual:key]) {
+            return i;
+		}
+	}
+	return NSNotFound;
 }
 
 - (NSInteger)indexOf:(id)key {
-//    if ([key isKindOfClass:CLJKeyword.class])
-//	{
-//        for (int i = 0; i < _array.length; i += 2)
-//		{
-//            if (key == _array.array[i])
-//                return i;
-//		}
-//    	return -1;
-//	}
-//    else
 	return [self indexOfObject:key];
 }
 

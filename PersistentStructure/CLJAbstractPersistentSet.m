@@ -30,7 +30,7 @@
 }
 
 - (id)get:(id)key {
-	return [_impl valAt:key];
+	return [_impl objectForKey:key];
 }
 
 - (NSUInteger)count {

@@ -17,7 +17,7 @@
 - (void)ensureEditable {}
 - (id<CLJITransientMap>)doassociateKey:(id)key :val { return nil; }
 - (id<CLJITransientMap>)doWithout:(id)key { return nil; }
-- (id)doValAt:(id)key :notFound { return nil; }
+- (id)doobjectForKey:(id)key :notFound { return nil; }
 - (NSInteger)doCount { return 0; }
 - (id<CLJIPersistentMap>)doPersistent { return nil; }
 
@@ -43,8 +43,8 @@
 	return ret;
 }
 
-- (id)valAt:(id)key{
-	return [self valAt:key default:nil];
+- (id)objectForKey:(id)key{
+	return [self objectForKey:key default:nil];
 }
 
 - (id<CLJITransientMap>)associateKey:(id)key value:(id)val {
@@ -62,9 +62,9 @@
 	return [self doPersistent];
 }
 
-- (id)valAt:(id)key default:(id)notFound {
+- (id)objectForKey:(id)key default:(id)notFound {
 	[self ensureEditable];
-	return [self doValAt:key :notFound];
+	return [self doobjectForKey:key :notFound];
 }
 
 - (NSUInteger)count {

@@ -30,7 +30,7 @@
 }
 
 - (BOOL)containsObject:(id)key  {
-	return self != [_impl valAt:key default:self];
+	return self != [_impl objectForKey:key default:self];
 }
 
 - (id<CLJITransientSet>)disjoin:(id)key {
@@ -42,7 +42,7 @@
 }
 
 - (id)get:(id)key {
-	return [_impl valAt:key];
+	return [_impl objectForKey:key];
 }
 
 #pragma mark - Abtract

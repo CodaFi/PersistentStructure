@@ -77,7 +77,7 @@ static const NSInteger HASHTABLE_THRESHOLD = 16;
 	return self;
 }
 
-- (id)doValAt:(id)key default:(id)notFound {
+- (id)doobjectForKey:(id)key default:(id)notFound {
 	NSInteger i = [self indexOf:key];
 	if (i >= 0) {
 		return _array.array[i + 1];

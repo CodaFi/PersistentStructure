@@ -17,7 +17,7 @@
 - (BOOL)containsKey:(id)key;
 
 /// Returns the value associated with a given key.
-- (id<CLJIMapEntry>)objectForKey:(id)aKey;
+- (id<CLJIMapEntry>)entryForKey:(id)aKey;
 
 /// Creates and returns an associative object with a given value associated a given key.
 - (id<CLJIAssociative>)associateKey:(id)key withValue:(id)val;

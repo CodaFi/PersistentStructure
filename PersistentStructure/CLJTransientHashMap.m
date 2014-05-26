@@ -83,7 +83,7 @@
 	return [[CLJPersistentHashMap alloc] initWithCount:_count root:_root hasNull:_hasNull nullValue:_nullValue];
 }
 
-- (id)doValAt:(id)key :(id)notFound {
+- (id)doobjectForKey:(id)key :(id)notFound {
 	if (key == nil) {
 		if (_hasNull) {
 			return _nullValue;

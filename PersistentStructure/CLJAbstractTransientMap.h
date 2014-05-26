@@ -14,7 +14,7 @@
 - (void)ensureEditable;
 - (id<CLJITransientMap>)doassociateKey:(id)key :val;
 - (id<CLJITransientMap>)doWithout:(id)key;
-- (id)doValAt:(id)key :notFound;
+- (id)doobjectForKey:(id)key :notFound;
 - (NSInteger)doCount;
 - (id<CLJIPersistentMap>)doPersistent;
 

@@ -33,7 +33,7 @@
 - (id<CLJINode>)assocWithShift:(NSInteger)shift hash:(NSInteger)hash key:(id)key value:(id)val addedLeaf:(CLJBox *)addedLeaf {
 	if (hash == _hash) {
 		NSInteger idx = [self findIndex:key];
-		if (idx != -1) {
+		if (idx != NSNotFound) {
 			if (_array.array[idx + 1] == val) {
 				return self;
 			}
@@ -56,7 +56,7 @@
 
 - (id<CLJINode>)withoutWithShift:(NSInteger)shift hash:(NSInteger)hash key:(id)key {
 	NSInteger idx = [self findIndex:key];
-	if (idx == -1) {
+	if (idx == NSNotFound) {
 		return self;
 	}
 	if (_count == 1) {
@@ -105,7 +105,7 @@
 			return i;
 		}
 	}
-	return -1;
+	return NSNotFound;
 }
 
 - (CLJHashCollisionNode *)ensureEditable:(NSThread *)edit {
@@ -142,7 +142,7 @@
 - (id<CLJINode>)assocOnThread:(NSThread *)edit shift:(NSInteger)shift hash:(NSInteger)hash key:(id)key val:(id)val addedLeaf:(CLJBox *)addedLeaf {
 	if (hash == _hash) {
 		NSInteger idx = [self findIndex:key];
-		if (idx != -1) {
+		if (idx != NSNotFound) {
 			if (_array.array[idx + 1] == val) {
 				return self;
 			}
@@ -171,7 +171,7 @@
 
 - (id<CLJINode>)withoutOnThread:(NSThread *)edit shift:(NSInteger)shift hash:(NSInteger)hash key:(id)key addedLeaf:(CLJBox *)removedLeaf {
 	NSInteger idx = [self findIndex:key];
-	if (idx == -1) {
+	if (idx == NSNotFound) {
 		return self;
 	}
 	removedLeaf.val = removedLeaf;
@@ -179,9 +179,9 @@
 		return nil;
 	}
 	CLJHashCollisionNode *editable = [self ensureEditable:edit];
-	editable->_array.array[idx] = editable->_array.array[2 * _count-2];
-	editable->_array.array[idx+1] = editable->_array.array[2 * _count-1];
-	editable->_array.array[2 * _count-2] = editable->_array.array[2 * _count-1] = nil;
+	editable->_array.array[idx] = editable->_array.array[2 * _count - 2];
+	editable->_array.array[idx+1] = editable->_array.array[2 * _count - 1];
+	editable->_array.array[2 * _count-2] = editable->_array.array[2 * _count - 1] = nil;
 	editable->_count--;
 	return editable;
 }

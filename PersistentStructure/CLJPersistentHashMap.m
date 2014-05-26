@@ -153,7 +153,7 @@ static id _CLJNOT_FOUND = nil;
 	return (_root != nil) ? [_root findWithShift:0 hash:[CLJPersistentHashMap hash:key] key:key notFound:_CLJNOT_FOUND] != _CLJNOT_FOUND : NO;
 }
 
-- (id<CLJIMapEntry>)objectForKey:(id)key {
+- (id<CLJIMapEntry>)entryForKey:(id)key {
 	if (key == nil) {
 		return _hasNull ? [[CLJMapEntry alloc]initWithKey:nil val:_nullValue] : nil;
 	}
@@ -175,15 +175,15 @@ static id _CLJNOT_FOUND = nil;
 	return [[CLJPersistentHashMap alloc] initWithMeta:self.meta count:addedLeaf.val == nil ? _count : _count + 1 root:newroot hasNull:_hasNull nullValue:_nullValue];
 }
 
-- (id)valAt:(id)key default:(id)notFound {
+- (id)objectForKey:(id)key default:(id)notFound {
 	if (key == nil) {
 		return _hasNull ? _nullValue : notFound;
 	}
 	return _root != nil ? [_root findWithShift:0 hash:[CLJPersistentHashMap hash:key] key:key notFound:notFound] : notFound;
 }
 
-- (id)valAt:(id)key {
-	return [self valAt:key default:nil];
+- (id)objectForKey:(id)key {
+	return [self objectForKey:key default:nil];
 }
 
 - (id<CLJIPersistentMap>)assocEx:(id)key value:(id)val {

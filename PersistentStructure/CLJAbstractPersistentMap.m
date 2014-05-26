@@ -156,7 +156,7 @@
 //			if (o instanceof Entry)
 //			{
 //				Entry e = (Entry) o;
-//				Entry found = objectForKey(e.key());
+//				Entry found = entryForKey(e.key());
 //				if (found != null && Util.equals(found.val(), e.val()))
 //					return true;
 //			}
@@ -167,7 +167,7 @@
 }
 
 - (id)get:(id)key {
-	return [self valAt:key];
+	return [self objectForKey:key];
 }
 
 - (BOOL)isEmpty {
@@ -256,15 +256,15 @@
 
 #pragma mark - Abtract
 
-- (id<CLJIMapEntry>)objectForKey:(id)key {
+- (id<CLJIMapEntry>)entryForKey:(id)key {
 	return nil;
 }
 
-- (id)valAt:(id)key {
+- (id)objectForKey:(id)key {
 	return nil;
 }
 
-- (id)valAt:(id)key default:(id)notFound {
+- (id)objectForKey:(id)key default:(id)notFound {
 	return nil;
 }
 

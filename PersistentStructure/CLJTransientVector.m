@@ -170,12 +170,12 @@
 	return (CLJArray){};
 }
 
-- (id)valAt:(id)key {
-	//note - relies on ensureEditable in 2-arg valAt
-	return [self valAt:key default:nil];
+- (id)objectForKey:(id)key {
+	//note - relies on ensureEditable in 2-arg objectForKey
+	return [self objectForKey:key default:nil];
 }
 
-- (id)valAt:(id)key default:(id)notFound {
+- (id)objectForKey:(id)key default:(id)notFound {
 	[self ensureEditable];
 	if ([CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).intValue;

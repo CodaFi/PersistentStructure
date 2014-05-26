@@ -253,7 +253,7 @@ static CLJEmptyList *_CLJSingletonEmptyList = nil;
 			return i;
 		}
 	}
-	return -1;
+	return NSNotFound;
 }
 
 - (NSInteger)lastIndexOf:(id)o {
