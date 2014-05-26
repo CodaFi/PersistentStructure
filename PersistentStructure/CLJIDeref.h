@@ -7,6 +7,10 @@
 //  Released under the MIT license.
 //
 
+/// The CLJIDeref protocol defines the method an object that can dereferenced must implemented.
 @protocol CLJIDeref <NSObject>
+
+/// Returns the value contained in the reference object.
 - (id)deref;
+
 @end

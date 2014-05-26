@@ -33,7 +33,7 @@ static CLJPersistentArrayMap *EMPTY;
 
 - (id)initWithMap:(id<CLJIMap>)other {
 	id<CLJITransientMap> ret = (id<CLJITransientMap> )EMPTY.asTransient;
-	for (id o in other.allValues) {
+	for (id o in other.allEntries) {
 		CLJMapEntry *e = (CLJMapEntry *) o;
 		ret = [ret associateKey:e.key value:e.val];
 	}
@@ -206,8 +206,9 @@ static CLJPersistentArrayMap *EMPTY;
 }
 
 - (id<CLJISeq>)seq {
-	if (_array.length > 0)
+	if (_array.length > 0) {
 		return [CLJSeq create:_array];
+	}
 	return nil;
 }
 

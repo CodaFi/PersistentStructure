@@ -74,7 +74,7 @@
 
 - (CLJArray)editableTail:(CLJArray)tl {
 	CLJArray ret = CLJArrayCreate(32);
-	CLJArrayCopy(tl,0,ret,0,tl.length);
+	CLJArrayCopy(tl, 0, ret, 0, tl.length);
 	return ret;
 }
 
@@ -99,9 +99,9 @@
 		newroot.array.array[0] = _root;
 		newroot.array.array[1] = [CLJTransientVector newPath:_root.edit level:_shift node:tailnode];
 		newshift += 5;
-	}
-	else
+	} else {
 		newroot = [self pushTailAtLevel:_shift parent:_root tail:tailnode];
+	}
 	_root = newroot;
 	_shift = newshift;
 	_count++;
@@ -141,7 +141,7 @@
 	if (_count < 32) {
 		return 0;
 	}
-	return ((_count-1) >> 5) << 5;
+	return ((_count - 1) >> 5) << 5;
 }
 
 - (CLJArray)arrayFor:(NSInteger)i {
@@ -150,7 +150,7 @@
 			return _tail;
 		CLJNode *node = _root;
 		for (NSInteger level = _shift; level > 0; level -= 5)
-			node = (CLJNode *) node.array.array[ (i >> level) & 0x01f];
+			node = (CLJNode *)node.array.array[(i >> level) & 0x01f];
 		return node.array;
 	}
 	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
@@ -249,7 +249,7 @@
 	NSInteger i = _count - 1;
 	//pop in tail?
 	if ((i & 0x01f) > 0) {
-		--_count;
+		_count--;
 		return self;
 	}
 	
@@ -266,7 +266,7 @@
 	}
 	_root = newroot;
 	_shift = newshift;
-	--_count;
+	_count--;
 	_tail = newtail;
 	return self;
 }

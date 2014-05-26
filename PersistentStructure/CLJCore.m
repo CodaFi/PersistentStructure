@@ -167,11 +167,11 @@ id<CLJITransientCollection> CLJCreateTransient(id<CLJIEditableCollection> coll) 
 	return [coll asTransient];
 }
 
-id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id key) {
+id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id key) {
 	return (id<CLJISet>)[(id<CLJIPersistentSet>)fromSet disjoin:key];
 }
 
-id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id restrict vals, ...) {
+id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id restrict vals, ...) {
 	va_list args;
 	va_start(args, vals);
 	id obj;

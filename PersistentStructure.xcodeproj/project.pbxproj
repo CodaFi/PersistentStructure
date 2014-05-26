@@ -64,6 +64,16 @@
 		845858EF18DEA906002E342B /* CLJTransientHashMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 845858ED18DEA906002E342B /* CLJTransientHashMap.m */; };
 		845858F218DEAB19002E342B /* CLJBitmapIndexedNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 845858F018DEAB19002E342B /* CLJBitmapIndexedNode.h */; };
 		845858F318DEAB19002E342B /* CLJBitmapIndexedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 845858F118DEAB19002E342B /* CLJBitmapIndexedNode.m */; };
+		846CA47B193302AC00215A58 /* CLJPersistentTreeMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 846CA479193302AC00215A58 /* CLJPersistentTreeMap.h */; };
+		846CA47C193302AC00215A58 /* CLJPersistentTreeMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 846CA47A193302AC00215A58 /* CLJPersistentTreeMap.m */; };
+		846CA47E1933030200215A58 /* CLJISorted.h in Headers */ = {isa = PBXBuildFile; fileRef = 846CA47D1933030200215A58 /* CLJISorted.h */; };
+		846CA4811933093400215A58 /* CLJTreeNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 846CA47F1933093400215A58 /* CLJTreeNode.h */; };
+		846CA4821933093400215A58 /* CLJTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 846CA4801933093400215A58 /* CLJTreeNode.m */; };
+		846CA4831933093400215A58 /* CLJTreeNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 846CA4801933093400215A58 /* CLJTreeNode.m */; };
+		846CA4861933B58300215A58 /* CLJIRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 846CA4851933B58300215A58 /* CLJIRandom.h */; };
+		846CA4881933BD5700215A58 /* murmur3.h in Headers */ = {isa = PBXBuildFile; fileRef = 846CA4871933BD5700215A58 /* murmur3.h */; };
+		846CA48A1933BD5F00215A58 /* murmur3.c in Sources */ = {isa = PBXBuildFile; fileRef = 846CA4891933BD5F00215A58 /* murmur3.c */; };
+		846CA48B1933BD5F00215A58 /* murmur3.c in Sources */ = {isa = PBXBuildFile; fileRef = 846CA4891933BD5F00215A58 /* murmur3.c */; };
 		847C076D18E29D73008F027F /* CLJNodeSeq.h in Headers */ = {isa = PBXBuildFile; fileRef = 847C076B18E29D73008F027F /* CLJNodeSeq.h */; };
 		847C076E18E29D73008F027F /* CLJNodeSeq.m in Sources */ = {isa = PBXBuildFile; fileRef = 847C076C18E29D73008F027F /* CLJNodeSeq.m */; };
 		847C077018E2A2BE008F027F /* CLJArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 847C076F18E2A2BE008F027F /* CLJArray.m */; };
@@ -225,6 +235,14 @@
 		845858ED18DEA906002E342B /* CLJTransientHashMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJTransientHashMap.m; sourceTree = "<group>"; };
 		845858F018DEAB19002E342B /* CLJBitmapIndexedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CLJBitmapIndexedNode.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		845858F118DEAB19002E342B /* CLJBitmapIndexedNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CLJBitmapIndexedNode.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		846CA479193302AC00215A58 /* CLJPersistentTreeMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJPersistentTreeMap.h; sourceTree = "<group>"; };
+		846CA47A193302AC00215A58 /* CLJPersistentTreeMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJPersistentTreeMap.m; sourceTree = "<group>"; };
+		846CA47D1933030200215A58 /* CLJISorted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJISorted.h; sourceTree = "<group>"; };
+		846CA47F1933093400215A58 /* CLJTreeNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJTreeNode.h; sourceTree = "<group>"; };
+		846CA4801933093400215A58 /* CLJTreeNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJTreeNode.m; sourceTree = "<group>"; };
+		846CA4851933B58300215A58 /* CLJIRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJIRandom.h; sourceTree = "<group>"; };
+		846CA4871933BD5700215A58 /* murmur3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = murmur3.h; sourceTree = "<group>"; };
+		846CA4891933BD5F00215A58 /* murmur3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = murmur3.c; sourceTree = "<group>"; };
 		847C076B18E29D73008F027F /* CLJNodeSeq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLJNodeSeq.h; sourceTree = "<group>"; };
 		847C076C18E29D73008F027F /* CLJNodeSeq.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLJNodeSeq.m; sourceTree = "<group>"; };
 		847C076F18E2A2BE008F027F /* CLJArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CLJArray.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -458,6 +476,8 @@
 				847C07D518E55A32008F027F /* CLJPersistentHashSet.m */,
 				847C07DE18E66005008F027F /* CLJTransientHashSet.h */,
 				847C07DF18E66005008F027F /* CLJTransientHashSet.m */,
+				846CA479193302AC00215A58 /* CLJPersistentTreeMap.h */,
+				846CA47A193302AC00215A58 /* CLJPersistentTreeMap.m */,
 				C931B76418714EC500CFC336 /* Interfaces */,
 				847C078718E2C351008F027F /* Nodes */,
 				847C078818E2C36B008F027F /* Abstract Structures */,
@@ -489,6 +509,8 @@
 				C931B7B41872B02600CFC336 /* CLJMapEntry.m */,
 				847C078318E2BAAB008F027F /* CLJNode.h */,
 				847C078418E2BAAB008F027F /* CLJNode.m */,
+				846CA47F1933093400215A58 /* CLJTreeNode.h */,
+				846CA4801933093400215A58 /* CLJTreeNode.m */,
 				C931B7BB1872B56900CFC336 /* CLJReduced.h */,
 				C931B7BC1872B56900CFC336 /* CLJReduced.m */,
 				847C079A18E3A134008F027F /* CLJSubVector.h */,
@@ -497,6 +519,8 @@
 				C931B76C1871521400CFC336 /* CLJUtils.m */,
 				84117DF71929819300DC1430 /* CLJAbstractObject.h */,
 				84117DF9192981BB00DC1430 /* CLJAbstractObject.m */,
+				846CA4871933BD5700215A58 /* murmur3.h */,
+				846CA4891933BD5F00215A58 /* murmur3.c */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -640,12 +664,14 @@
 				847C07C218E55617008F027F /* CLJIPersistentSet.h */,
 				C931B748187146F900CFC336 /* CLJIPersistentStack.h */,
 				C931B7651871502B00CFC336 /* CLJIPersistentVector.h */,
+				846CA4851933B58300215A58 /* CLJIRandom.h */,
 				C931B7851871710900CFC336 /* CLJIReduce.h */,
 				C931B767187150C900CFC336 /* CLJIReversible.h */,
 				C931B7421871461E00CFC336 /* CLJISeq.h */,
 				C931B73E1871457900CFC336 /* CLJISeqable.h */,
 				C931B744187146A600CFC336 /* CLJISequential.h */,
 				C931B77718715C1900CFC336 /* CLJISet.h */,
+				846CA47D1933030200215A58 /* CLJISorted.h */,
 				C931B79118721DA900CFC336 /* CLJITransientAssociative.h */,
 				C931B78D187213C300CFC336 /* CLJITransientCollection.h */,
 				C931B78F18721D3E00CFC336 /* CLJITransientMap.h */,
@@ -673,8 +699,10 @@
 				C931B7661871502B00CFC336 /* CLJIPersistentVector.h in Headers */,
 				847C07C618E556CC008F027F /* CLJAbstractPersistentSet.h in Headers */,
 				847C07A418E5197B008F027F /* CLJRVecSeq.h in Headers */,
+				846CA4881933BD5700215A58 /* murmur3.h in Headers */,
 				C931B7B51872B02600CFC336 /* CLJMapEntry.h in Headers */,
 				847C077218E2A2C8008F027F /* CLJArray.h in Headers */,
+				846CA4811933093400215A58 /* CLJTreeNode.h in Headers */,
 				84117DF81929819300DC1430 /* CLJAbstractObject.h in Headers */,
 				C931B783187170A700CFC336 /* CLJPersistentList.h in Headers */,
 				847C07DD18E65E51008F027F /* CLJITransientSet.h in Headers */,
@@ -702,6 +730,7 @@
 				C931B7971872291C00CFC336 /* CLJBox.h in Headers */,
 				C931B7A7187245FE00CFC336 /* CLJPersistentVector.h in Headers */,
 				845858F218DEAB19002E342B /* CLJBitmapIndexedNode.h in Headers */,
+				846CA4861933B58300215A58 /* CLJIRandom.h in Headers */,
 				C931B775187152BE00CFC336 /* CLJLazySeq.h in Headers */,
 				847C078F18E2D201008F027F /* CLJIChunkedSeq.h in Headers */,
 				C931B78C187213A100CFC336 /* CLJIEditableCollection.h in Headers */,
@@ -719,6 +748,7 @@
 				C931B78E187213C300CFC336 /* CLJITransientCollection.h in Headers */,
 				847C07B918E531FD008F027F /* CLJDefines.h in Headers */,
 				C931B794187227FC00CFC336 /* CLJINode.h in Headers */,
+				846CA47B193302AC00215A58 /* CLJPersistentTreeMap.h in Headers */,
 				C931B7B11872AD9F00CFC336 /* CLJAbstractMapEntry.h in Headers */,
 				C931B768187150C900CFC336 /* CLJIReversible.h in Headers */,
 				C931B79E18722CA600CFC336 /* CLJIComparable.h in Headers */,
@@ -726,6 +756,7 @@
 				C931B79218721DA900CFC336 /* CLJITransientAssociative.h in Headers */,
 				84117E03192989B700DC1430 /* CLJPersistentVectorIterator.h in Headers */,
 				847C079818E2D4C7008F027F /* CLJArrayChunk.h in Headers */,
+				846CA47E1933030200215A58 /* CLJISorted.h in Headers */,
 				C931B7861871710900CFC336 /* CLJIReduce.h in Headers */,
 				C931B7A0187236D600CFC336 /* CLJIIndexedSeq.h in Headers */,
 				C931B79B18722C2200CFC336 /* CLJAbstractPersistentVector.h in Headers */,
@@ -885,7 +916,9 @@
 				84117DEB19297E4D00DC1430 /* CLJArray.m in Sources */,
 				84117DEC19297E4D00DC1430 /* CLJArrayChunk.m in Sources */,
 				84117DED19297E4D00DC1430 /* CLJBox.m in Sources */,
+				846CA48B1933BD5F00215A58 /* murmur3.c in Sources */,
 				84117DEE19297E4D00DC1430 /* CLJMapEntry.m in Sources */,
+				846CA4831933093400215A58 /* CLJTreeNode.m in Sources */,
 				84117DEF19297E4D00DC1430 /* CLJNode.m in Sources */,
 				84117DF019297E4D00DC1430 /* CLJReduced.m in Sources */,
 				84117DF119297E4D00DC1430 /* CLJSubVector.m in Sources */,
@@ -906,6 +939,7 @@
 				C931B7C21872B74C00CFC336 /* CLJAbstractTransientMap.m in Sources */,
 				847C07C118E54AFC008F027F /* CLJTransientArrayMap.m in Sources */,
 				847C07A918E520EF008F027F /* CLJStringSeq.m in Sources */,
+				846CA48A1933BD5F00215A58 /* murmur3.c in Sources */,
 				847C078C18E2C388008F027F /* CLJSeqIterator.m in Sources */,
 				847C077A18E2ADAC008F027F /* CLJSeq.m in Sources */,
 				847C079D18E3A134008F027F /* CLJSubVector.m in Sources */,
@@ -918,6 +952,7 @@
 				84117E04192989B700DC1430 /* CLJPersistentVectorIterator.m in Sources */,
 				847C07D718E55A32008F027F /* CLJPersistentHashSet.m in Sources */,
 				845858F318DEAB19002E342B /* CLJBitmapIndexedNode.m in Sources */,
+				846CA47C193302AC00215A58 /* CLJPersistentTreeMap.m in Sources */,
 				847C07A118E3A324008F027F /* CLJVecSeq.m in Sources */,
 				847C078618E2BAAB008F027F /* CLJNode.m in Sources */,
 				C931B7721871528800CFC336 /* CLJAbstractSeq.m in Sources */,
@@ -939,6 +974,7 @@
 				847C079518E2D34E008F027F /* CLJChunkedSeq.m in Sources */,
 				847C078218E2BA42008F027F /* CLJTransientVector.m in Sources */,
 				847C077E18E2B2FB008F027F /* CLJHashCollisionNode.m in Sources */,
+				846CA4821933093400215A58 /* CLJTreeNode.m in Sources */,
 				847C077618E2A905008F027F /* CLJArrayNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1142,6 +1178,7 @@
 				84117DC719297E2A00DC1430 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C931B70F1871453500CFC336 /* Build configuration list for PBXProject "PersistentStructure" */ = {
 			isa = XCConfigurationList;

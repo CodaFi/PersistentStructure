@@ -11,8 +11,11 @@
 #import "CLJISequential.h"
 #import "CLJICounted.h"
 
+/// The CLJIIndexedSeq protocol declares the method required to get the starting or ending index
+/// from a Seq.
 @protocol CLJIIndexedSeq <CLJISeq, CLJISequential, CLJICounted>
 
+/// Returns the starting or ending index for the reciever.
 - (NSInteger)index;
 
 @end

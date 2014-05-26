@@ -150,11 +150,11 @@ extern id<CLJIPersistentCollection> CLJOverloadable CLJAssoc(id<CLJIPersistentCo
 
 /// Disj[oin]. Returns a new set of the same (hashed/sorted) type, that does not contain the given
 /// key.
-extern id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id key);
+extern id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id key);
 
 /// Disj[oin]. Returns a new set of the same (hashed/sorted) type, that does not contain the given
 /// keys.
-extern id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id restrict vals, ...);
+extern id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id restrict vals, ...);
 
 /// Returns the metadata of the provided object or collection.  If there is no metadata associated
 /// with the object, returns nil.

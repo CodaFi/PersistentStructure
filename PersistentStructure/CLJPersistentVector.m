@@ -215,10 +215,10 @@ static CLJPersistentVector *EMPTY = nil;
 }
 
 - (CLJNode *)pushTailAtLevel:(NSInteger)level parent:(CLJNode *)parent tail:(CLJNode *)tailnode {
-	//if parent is leaf, insert node,
+	// if parent is leaf, insert node,
 	// else does it map to an existing child? -> nodeToInsert = pushNode one more level
 	// else alloc new path
-	//return  nodeToInsert placed in copy of parent
+	// return  nodeToInsert placed in copy of parent
 	NSInteger subidx = ((_count - 1) >> level) & 0x01f;
 	CLJNode *ret = [[CLJNode alloc] initWithThread:parent.edit array:CLJArrayCreateCopy(parent.array)];
 	CLJNode *nodeToInsert;
@@ -258,10 +258,10 @@ static CLJPersistentVector *EMPTY = nil;
 
 - (id)kvreduce:(CLJIKeyValueReduceBlock)f init:(id)init {
 	NSInteger step = 0;
-	for (NSInteger i=0;i<_count;i+=step){
+	for (NSInteger i = 0; i < _count; i += step){
 		CLJArray array = [self arrayFor:i];
-		for (NSInteger j =0; j < array.length; j++){
-			init = f(init,@(j+i),array.array[j]);
+		for (NSInteger j = 0; j < array.length; j++){
+			init = f(init, @(j + i), array.array[j]);
 			if ([CLJUtils isReduced:init]) {
 				return ((id<CLJIDeref>)init).deref;
 			}

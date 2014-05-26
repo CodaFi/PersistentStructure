@@ -14,7 +14,6 @@
 @protocol CLJIList <CLJICollection>
 
 - (BOOL)containsObject:(id)o;
-- (BOOL)containsAll:(id<CLJICollection>)c;
 - (BOOL)isEqual:(id)object;
 - (id)get:(NSInteger)index;
 - (NSInteger)indexOf:(id)o;

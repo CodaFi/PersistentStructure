@@ -18,4 +18,7 @@ typedef id(*CLJIReduceFunction)(id a, id b);
 
 // Key-Value Reduce :: 
 typedef id(^CLJIKeyValueReduceBlock)(id init, id a, id b);
+
+typedef NSComparisonResult(^CLJComparatorBlock)(id, id);
+
 #endif

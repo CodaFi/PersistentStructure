@@ -17,8 +17,7 @@
 
 - (BOOL)containsKey:(id)key;
 - (BOOL)containsValue:(id)value;
-- (id<CLJISet> /*id<CLJIMapEntry>*/)allValues;
-- (BOOL)isEqual:(id)o;
+- (id<CLJISet> /*id<CLJIMapEntry>*/)allEntries;
 - (BOOL)isEmpty;
 - (id<CLJISet>)allKeys;
 

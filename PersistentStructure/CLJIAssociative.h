@@ -11,6 +11,8 @@
 #import "CLJILookup.h"
 #import "CLJIMapEntry.h"
 
+/// The CLJIAssociative protocol declares the three methods that a class must implement so instances
+/// of that class 
 @protocol CLJIAssociative <CLJIPersistentCollection, CLJILookup>
 
 /// Returns YES if the reciever contains an entry for a given key.  Else NO.

@@ -16,7 +16,7 @@ CLJTestBegin(CLJDataStructures)
 
 - (id<CLJISeq>)diff:(id<CLJISeq>)seq1 and:(id<CLJISeq>)seq2 {
 	return CLJCreateSeq(CLJReduce(^id(id<CLJISet> a, id b) {
-		return CLJDisjoin(a, b);
+		return CLJDisj(a, b);
 	}, CLJCreateSet(seq1), CLJCreateSet(seq2)));
 }
 

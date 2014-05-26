@@ -227,10 +227,6 @@ static CLJEmptyList *_CLJSingletonEmptyList = nil;
 	return [CLJUtils _emptyArray];
 }
 
-- (BOOL)containsAll:(id<CLJICollection>)c {
-	return [c isEmpty];
-}
-
 //////////// List stuff /////////////////
 - (id<CLJIList>)reify {
 //	return Collections.unmodifiableList(@[self]);

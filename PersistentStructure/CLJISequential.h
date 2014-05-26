@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+/// The CLJISequential protocol acts as a marker that a class admits fast (generally constant or
+/// logarithmic time) sequential access to values.
 @protocol CLJISequential <NSObject>
 
 @end

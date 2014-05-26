@@ -10,6 +10,8 @@
 #import "CLJIIndexed.h"
 #include "CLJTypes.h"
 
+/// The CLJIChunk protocol declares the two methods necessary for an object to call itself a
+/// 'Chunk'.  Chunks are windows into the values of a collection that permit only reduction 
 @protocol CLJIChunk <CLJIIndexed>
 
 /// Returns a new chunk with the same objects as the reciever except the first.

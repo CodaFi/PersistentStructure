@@ -11,6 +11,9 @@
 #import "CLJISequential.h"
 #import "CLJIChunk.h"
 
+/// The CLJIChunkedSeq protocol describes the methods necessary for an object to act like both a
+/// Chunk and a Seq.  Chunked Sequences can act like enumerable windows into the values of a
+/// collection.
 @protocol CLJIChunkedSeq <CLJISeq, CLJISequential>
 
 - (id<CLJIChunk>)chunkedFirst;
