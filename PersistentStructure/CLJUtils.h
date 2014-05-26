@@ -31,6 +31,7 @@
 + (CLJArray)seqToArray:(id<CLJISeq>)seq;
 + (NSInteger)count:(id)coll;
 + (id)nthOf:(id)coll index:(NSInteger)index;
++ (id)nthOf:(id)coll index:(NSInteger)n notFound:(id)notFound;
 + (id<CLJISeq>)cons:(id)o to:(id)seq;
 + (id<CLJIPersistentCollection>)conj:(id)x to:(id<CLJIPersistentCollection>)coll;
 + (id<CLJIAssociative>)associateKey:(id)key to:(id)val in:(id)coll;

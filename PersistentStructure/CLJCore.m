@@ -37,22 +37,34 @@ id CLJSecond(id coll) {
 	return [CLJUtils first:[CLJUtils next:coll]];
 }
 
-id CLJFirstFirst(id coll) {
+id CLJFFirst(id coll) {
 	return [CLJUtils first:[CLJUtils first:coll]];
 }
 
-id CLJNextFirst(id coll) {
+id CLJNFirst(id coll) {
 	return [CLJUtils next:[CLJUtils first:coll]];
 }
 
-id (* const CLJFirstNext)(id coll) = CLJSecond;
+id (* const CLJFNext)(id coll) = CLJSecond;
 
-id CLJNextNext(id coll) {
+id CLJNNext(id coll) {
 	return [CLJUtils next:[CLJUtils next:coll]];
 }
 
 id<CLJISeq> CLJCreateSeq(id coll) {
 	return [CLJUtils seq:coll];
+}
+
+NSUInteger CLJCount(id coll) {
+	return [CLJUtils count:coll];
+}
+
+id CLJOverloadable CLJObjectAtIndex(id coll, NSUInteger index) {
+	return [CLJUtils nthOf:coll index:index];
+}
+
+id CLJOverloadable CLJObjectAtIndex(id coll, NSUInteger index, id notFound) {
+	return [CLJUtils nthOf:coll index:index notFound:notFound];
 }
 
 BOOL CLJIsSeq(id coll) {
@@ -130,7 +142,7 @@ id<CLJISeq> CLJButLast(id coll) {
 }
 
 id<CLJIPersistentVector, CLJIEditableCollection> CLJCreateVector(id coll) {
-	if ([coll conformsToProtocol:@protocol(CLJICollection)]) {
+	if (![coll conformsToProtocol:@protocol(CLJICollection)]) {
 		return (id<CLJIPersistentVector, CLJIEditableCollection>)[CLJLazilyPersistentVector create:coll];
 	}
 	return (id<CLJIPersistentVector, CLJIEditableCollection>)[CLJLazilyPersistentVector createOwning:[coll toArray]];
@@ -155,8 +167,8 @@ id<CLJITransientCollection> CLJCreateTransient(id<CLJIEditableCollection> coll) 
 	return [coll asTransient];
 }
 
-id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet) {
-	return fromSet;
+id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id key) {
+	return (id<CLJISet>)[(id<CLJIPersistentSet>)fromSet disjoin:key];
 }
 
 id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id restrict vals, ...) {
@@ -168,6 +180,17 @@ id<CLJISet> CLJOverloadable CLJDisjoin(id<CLJISet> fromSet, id restrict vals, ..
 	}
 	va_end(args);
 	return fromSet;
+}
+
+id<CLJIPersistentMap> CLJMetadata(id coll) {
+	if ([coll conformsToProtocol:@protocol(CLJIMeta)]) {
+		return [coll meta];
+	}
+	return nil;
+}
+
+id<CLJIObj> CLJWithMetadata(id<CLJIObj> obj, id<CLJIPersistentMap> m) {
+	return [obj withMeta:m];
 }
 
 id<CLJISeq> CLJReduce1f(CLJIReduceFunction reducer, id<CLJISeqable> coll) {

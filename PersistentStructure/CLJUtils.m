@@ -27,12 +27,13 @@
 @implementation CLJUtils
 
 + (id<CLJISeq>)seq:(id)coll {
-	if ([coll isKindOfClass:CLJAbstractSeq.class])
+	if ([coll isKindOfClass:CLJAbstractSeq.class]) {
 		return (CLJAbstractSeq *)coll;
-	else if ([coll isKindOfClass:CLJLazySeq.class])
+	} else if ([coll isKindOfClass:CLJLazySeq.class]) {
 		return ((CLJLazySeq *)coll).seq;
-	else
+	} else {
 		return [CLJUtils seqFrom:coll];
+	}
 }
 
 + (id<CLJISeq>)seqFrom:(id)coll {
@@ -147,6 +148,14 @@
 	return [CLJUtils nthFrom:[CLJUtils ret1s:coll null:nil] index:n];
 }
 
++ (id)nthOf:(id)coll index:(NSInteger)n notFound:(id)notFound {
+	if([coll conformsToProtocol:@protocol(CLJIIndexed)]) {
+		id<CLJIIndexed> v = (id<CLJIIndexed>)coll;
+		return [v objectAtIndex:n default:notFound];
+	}
+	return [CLJUtils nthFrom:coll index:n notFound:notFound];
+}
+
 + (id)nthFrom:(id)coll index:(NSInteger)n {
 	if (coll == nil) {
 		return nil;
@@ -170,6 +179,34 @@
 				return seq.first;
 		}
 		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
+	} else {
+		CLJRequestConcreteImplementation(coll, @selector(nthFrom:index:), [coll class]);
+	}
+	return nil;
+}
+
++ (id)nthFrom:(id)coll index:(NSInteger)n notFound:(id)notFound {
+	if(coll == nil) {
+		return notFound;
+	} else if(n < 0) {
+		return notFound;
+	} else if([coll conformsToProtocol:@protocol(CLJIMapEntry)]) {
+		id<CLJIMapEntry> e = (id<CLJIMapEntry>)coll;
+		if(n == 0) {
+			return e.key;
+		} else if(n == 1) {
+			return e.val;
+		}
+		return notFound;
+	} else if([coll conformsToProtocol:@protocol(CLJISequential)]) {
+		id<CLJISeq> seq = [CLJUtils seq:coll];
+		coll = nil;
+		for(int i = 0; i <= n && seq != nil; i++, seq = seq.next) {
+			if(i == n) {
+				return seq.first;
+			}
+		}
+		return notFound;
 	} else {
 		CLJRequestConcreteImplementation(coll, @selector(nthFrom:index:), [coll class]);
 	}
