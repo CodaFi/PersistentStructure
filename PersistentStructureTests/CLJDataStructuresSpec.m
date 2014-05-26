@@ -7,6 +7,8 @@
 //  Released under the MIT license.
 //
 
+#import <CommonCrypto/CommonHMAC.h>
+
 CLJTestBegin(CLJDataStructures)
 
 /// (defn diff [s1 s2]

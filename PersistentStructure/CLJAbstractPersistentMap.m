@@ -30,7 +30,7 @@
 - (id<CLJIPersistentCollection>)cons:(id)o {
 	if ([o conformsToProtocol:@protocol(CLJIMapEntry)]) {
 		id<CLJIMapEntry>e = (id<CLJIMapEntry>)o;
-		return [self associateKey:e.getKey value:e.getValue];
+		return [self associateKey:e.key value:e.val];
 	} else if ([o conformsToProtocol:@protocol(CLJIPersistentVector)]) {
 		id<CLJIPersistentVector> v = (id<CLJIPersistentVector>) o;
 		if (v.count != 2) {
@@ -41,7 +41,7 @@
 	id<CLJIPersistentMap> ret = self;
 	for (id<CLJISeq> es = [CLJUtils seq:o]; es != nil; es = es.next) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)es.first;
-		ret = [ret associateKey:e.getKey value:e.getValue];
+		ret = [ret associateKey:e.key value:e.val];
 	}
 	return ret;
 }
@@ -63,9 +63,9 @@
 	
 	for (id<CLJISeq> s = m1.seq; s != nil; s = s.next) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)s.first;
-		BOOL found = [m containsKey:e.getKey];
+		BOOL found = [m containsKey:e.key];
 		
-		if (!found || ![CLJUtils isEqual:e.getValue other:[m get:e.getKey]]) {
+		if (!found || ![CLJUtils isEqual:e.val other:[m get:e.key]]) {
 			return NO;
 		}
 	}
@@ -89,9 +89,9 @@
 	
 	for (id<CLJISeq> s = self.seq; s != nil; s = s.next) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)s.first;
-		BOOL found = [m containsKey:e.getKey];
+		BOOL found = [m containsKey:e.key];
 		
-		if (!found || ![CLJUtils equiv:(__bridge void *)(e.getValue) other:(__bridge void *)([m get:e.getKey])]) {
+		if (!found || ![CLJUtils equiv:(__bridge void *)(e.val) other:(__bridge void *)([m get:e.key])]) {
 			return NO;
 		}
 	}
@@ -110,7 +110,7 @@
 	NSInteger hash = 0;
 	for (id<CLJISeq> s = m.seq; s != nil; s = s.next) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)s.first;
-		hash += (e.getKey == nil ? 0 : [e.getKey hash]) ^ (e.getValue == nil ? 0 : [e.getValue hash]);
+		hash += (e.key == nil ? 0 : [e.key hash]) ^ (e.val == nil ? 0 : [e.val hash]);
 	}
 	return hash;
 }
@@ -126,7 +126,7 @@
 	NSInteger hash = 0;
 	for (id<CLJISeq> s = m.seq; s != nil; s = s.next) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)s.first;
-		hash += [CLJUtils hasheq:e.getKey] ^ [CLJUtils hasheq:e.getValue];
+		hash += [CLJUtils hasheq:e.key] ^ [CLJUtils hasheq:e.val];
 	}
 	return hash;
 }
@@ -156,8 +156,8 @@
 //			if (o instanceof Entry)
 //			{
 //				Entry e = (Entry) o;
-//				Entry found = objectForKey(e.getKey());
-//				if (found != null && Util.equals(found.getValue(), e.getValue()))
+//				Entry found = objectForKey(e.key());
+//				if (found != null && Util.equals(found.val(), e.val()))
 //					return true;
 //			}
 //			return false;
@@ -189,7 +189,7 @@
 //				
 //				public Object next(){
 //					Entry e = (Entry) mi.next();
-//					return e.getKey();
+//					return e.key();
 //				}
 //				
 //				public void remove(){
@@ -238,7 +238,7 @@
 //				
 //				public Object next(){
 //					Entry e = (Entry) mi.next();
-//					return e.getValue();
+//					return e.val();
 //				}
 //				
 //				public void remove(){

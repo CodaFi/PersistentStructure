@@ -66,11 +66,7 @@
 	return nil;
 }
 
-- (id)getKey {
-	return nil;
-}
-
-- (id)getValue {
+- (id)key {
 	return nil;
 }
 

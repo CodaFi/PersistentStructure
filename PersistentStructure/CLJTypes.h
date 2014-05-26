@@ -7,8 +7,8 @@
 //  Released under the MIT license.
 //
 
-#ifndef PersistentStructure_CLJTypes_h
-#define PersistentStructure_CLJTypes_h
+#ifndef PERSISTENT_STRUCTURE_CLJTYPES_H
+#define PERSISTENT_STRUCTURE_CLJTYPES_H
 
 // Reduce (foldl1) :: (a -> b -> b) -> [a] -> b
 typedef id(^CLJIReduceBlock)(id a, id b);

@@ -26,7 +26,7 @@
 	if ([o isKindOfClass:CLJMapEntry.class]) {
 		CLJMapEntry *e = (CLJMapEntry *)o;
 		
-		return [self associateKey:e.getKey value:e.getValue];
+		return [self associateKey:e.key value:e.val];
 	} else if ([o conformsToProtocol:@protocol(CLJIPersistentVector)]) {
 		id<CLJIPersistentVector> v = (id<CLJIPersistentVector>) o;
 		if (v.count != 2) {
@@ -38,7 +38,7 @@
 	id<CLJITransientMap> ret = self;
 	for (id<CLJISeq> es = [CLJUtils seq:o]; es != nil; es = es.next) {
 		CLJMapEntry *e = (CLJMapEntry *)es.first;
-		ret = [ret associateKey:e.getKey value:e.getValue];
+		ret = [ret associateKey:e.key value:e.val];
 	}
 	return ret;
 }

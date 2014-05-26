@@ -38,5 +38,6 @@ CLJArray CLJArrayCopy(CLJArray src, NSUInteger srcPos, CLJArray dest, NSUInteger
 		mergeArr[j] = src.array[i];
 	}
 	memmove((void*)&dest.array[destPos], &mergeArr, length * sizeof(id));
+	free(mergeArr);
 	return dest;
 }

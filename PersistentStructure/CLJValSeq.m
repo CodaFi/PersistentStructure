@@ -39,7 +39,7 @@
 }
 
 - (id)first {
-	return ((id<CLJIMapEntry>)_seq.first).getValue;
+	return ((id<CLJIMapEntry>)_seq.first).val;
 }
 
 - (id<CLJISeq>)next {

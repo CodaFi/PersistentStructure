@@ -7,8 +7,8 @@
 //  Released under the MIT license.
 //
 
-#ifndef PersistentStructure_CLJInterfaces_h
-#define PersistentStructure_CLJInterfaces_h
+#ifndef PERSISTENT_STRUCTURE_CLJINTERFACES_H
+#define PERSISTENT_STRUCTURE_CLJINTERFACES_H
 
 #import "CLJTypes.h"
 #import "CLJIAssociative.h"

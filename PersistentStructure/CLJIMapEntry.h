@@ -11,7 +11,5 @@
 - (id)key;
 - (id)val;
 - (BOOL)isEqual:(id)o;
-- (id)getKey;
-- (id)getValue;
 - (id)setValue:(id)value;
 @end

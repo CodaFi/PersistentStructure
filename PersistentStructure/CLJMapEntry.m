@@ -31,12 +31,4 @@
 	return _val;
 }
 
-- (id)getKey {
-	return self.key;
-}
-
-- (id)getValue {
-	return self.val;
-}
-
 @end
