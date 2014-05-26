@@ -69,7 +69,7 @@
 + (CLJArray)seqToArray:(id<CLJISeq>)seq {
 	NSInteger len = [CLJUtils length:seq];
 	CLJArray ret = CLJArrayCreate(len);
-	for (NSInteger i = 0; seq != nil; ++i, seq = seq.next) {
+	for (NSInteger i = 0; seq != nil; i++, seq = seq.next) {
 		ret.array[i] = seq.first;
 	}
 	return ret;
@@ -165,7 +165,7 @@
 	} else if ([coll conformsToProtocol:@protocol(CLJISequential)]) {
 		id<CLJISeq> seq = [CLJUtils seq:coll];
 		coll = nil;
-		for (NSInteger i = 0; i <= n && seq != nil; ++i, seq = seq.next) {
+		for (NSInteger i = 0; i <= n && seq != nil; i++, seq = seq.next) {
 			if (i == n)
 				return seq.first;
 		}

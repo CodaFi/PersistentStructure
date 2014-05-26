@@ -260,7 +260,7 @@ static CLJPersistentVector *EMPTY = nil;
 	NSInteger step = 0;
 	for (NSInteger i=0;i<_count;i+=step){
 		CLJArray array = [self arrayFor:i];
-		for (NSInteger j =0;j<array.length;++j){
+		for (NSInteger j =0; j < array.length; j++){
 			init = f(init,@(j+i),array.array[j]);
 			if ([CLJUtils isReduced:init]) {
 				return ((id<CLJIDeref>)init).deref;

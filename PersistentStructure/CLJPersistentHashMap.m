@@ -98,7 +98,7 @@ static id _CLJNOT_FOUND = nil;
 
 + (CLJPersistentHashMap *)createWithCheckSeq:(id<CLJISeq>)items {
 	id<CLJITransientMap> ret = (id<CLJITransientMap>)_CLJEmptyPersistentHashMap.asTransient;
-	for (NSInteger i = 0; items != nil; items = items.next.next, ++i) {
+	for (NSInteger i = 0; items != nil; items = items.next.next, i++) {
 		if (items.next == nil) {
 			NSAssert(0, @"No value supplied for key: %@", items.first);
 		}

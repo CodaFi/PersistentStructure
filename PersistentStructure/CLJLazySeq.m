@@ -73,7 +73,7 @@
 - (NSUInteger)count {
 	NSInteger c = 0;
 	for (id<CLJISeq> s = self.seq; s != nil; s = s.next) {
-		++c;
+		c++;
 	}
 	return c;
 }

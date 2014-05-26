@@ -65,14 +65,14 @@ static CLJPersistentHashSet *EMPTY;
 		if (ret.count != i + 1) {
 			[NSException raise:NSInvalidArgumentException format:@"Duplicate key at index %tu", i];
 		}
-		++i;
+		i++;
 	}
 	return ret;
 }
 
 + (CLJPersistentHashSet *)createWithCheckSeq:(id<CLJISeq>)items {
 	CLJPersistentHashSet *ret = EMPTY;
-	for (NSUInteger i = 0; items != nil; items = items.next, ++i) {
+	for (NSUInteger i = 0; items != nil; items = items.next, i++) {
 		ret = (CLJPersistentHashSet *)[ret cons:items.first];
 		if (ret.count != i + 1) {
 			[NSException raise:NSInvalidArgumentException format:@"Duplicate key at index %tu", i];

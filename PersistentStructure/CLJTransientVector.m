@@ -13,7 +13,7 @@
 #import "CLJUtils.h"
 
 @implementation CLJTransientVector {
-	NSInteger _cnt;
+	NSInteger _count;
 	NSInteger _shift;
 	CLJNode *_root;
 	CLJArray _tail;
@@ -22,7 +22,7 @@
 - (id)initWithCount:(NSInteger)cnt shift:(NSInteger)shift node:(CLJNode *)root tail:(CLJArray)tail {
 	self = [super init];
 	
-	_cnt = cnt;
+	_count = cnt;
 	_shift = shift;
 	_root = root;
 	_tail = tail;
@@ -36,12 +36,13 @@
 
 - (NSUInteger)count {
 	[self ensureEditable];
-	return _cnt;
+	return _count;
 }
 
 - (CLJNode *)ensureEditableNode:(CLJNode *)node {
-	if (node.edit == _root.edit)
+	if (node.edit == _root.edit) {
 		return node;
+	}
 	return [[CLJNode alloc] initWithThread:_root.edit array:_root.array];
 }
 
@@ -66,9 +67,9 @@
 		[NSException raise:NSInternalInconsistencyException format:@"Mutation release by non-owner thread"];
 	}
 //	_root.edit = nil;
-	CLJArray trimmedTail = CLJArrayCreate(_cnt-self.tailoff);
+	CLJArray trimmedTail = CLJArrayCreate(_count-self.tailoff);
 	CLJArrayCopy(_tail,0,trimmedTail,0,trimmedTail.length);
-	return [[CLJPersistentVector alloc] initWithCount:_cnt shift:_shift root:(id<CLJINode>)_root tail:trimmedTail];
+	return [[CLJPersistentVector alloc] initWithCount:_count shift:_shift root:(id<CLJINode>)_root tail:trimmedTail];
 }
 
 - (CLJArray)editableTail:(CLJArray)tl {
@@ -79,11 +80,11 @@
 
 - (id<CLJITransientCollection>)conj:(id)val {
 	[self ensureEditable];
-	NSInteger i = _cnt;
+	NSInteger i = _count;
 	//room in tail?
 	if (i - self.tailoff < 32) {
 		_tail.array[i & 0x01f] = val;
-		++_cnt;
+		_count++;
 		return self;
 	}
 	//full tail, push into tree
@@ -93,7 +94,7 @@
 	_tail.array[0] = val;
 	NSInteger newshift = _shift;
 	//overflow root?
-	if ((_cnt >> 5) > (1 << _shift)) {
+	if ((_count >> 5) > (1 << _shift)) {
 		newroot = [[CLJNode alloc] initWithThread:_root.edit];
 		newroot.array.array[0] = _root;
 		newroot.array.array[1] = [CLJTransientVector newPath:_root.edit level:_shift node:tailnode];
@@ -103,7 +104,7 @@
 		newroot = [self pushTailAtLevel:_shift parent:_root tail:tailnode];
 	_root = newroot;
 	_shift = newshift;
-	++_cnt;
+	_count++;
 	return self;
 }
 
@@ -113,7 +114,7 @@
 	// else alloc new path
 	//return  nodeToInsert placed in parent
 	parent = [self ensureEditableNode:parent];
-	NSInteger subidx = ((_cnt - 1) >> level) & 0x01f;
+	NSInteger subidx = ((_count - 1) >> level) & 0x01f;
 	CLJNode *ret = parent;
 	CLJNode *nodeToInsert;
 	if (level == 5) {
@@ -137,14 +138,14 @@
 }
 
 - (NSInteger)tailoff {
-	if (_cnt < 32) {
+	if (_count < 32) {
 		return 0;
 	}
-	return ((_cnt-1) >> 5) << 5;
+	return ((_count-1) >> 5) << 5;
 }
 
 - (CLJArray)arrayFor:(NSInteger)i {
-	if (i >= 0 && i < _cnt) {
+	if (i >= 0 && i < _count) {
 		if (i >= self.tailoff)
 			return _tail;
 		CLJNode *node = _root;
@@ -157,7 +158,7 @@
 }
 
 - (CLJArray)editableArrayFor:(NSInteger)i {
-	if (i >= 0 && i < _cnt) {
+	if (i >= 0 && i < _count) {
 		if (i >= self.tailoff)
 			return _tail;
 		CLJNode *node = _root;
@@ -178,7 +179,7 @@
 	[self ensureEditable];
 	if ([CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).intValue;
-		if (i >= 0 && i < _cnt)
+		if (i >= 0 && i < _count)
 			return [self nth:i];
 	}
 	return notFound;
@@ -198,7 +199,7 @@
 
 - (id<CLJITransientVector>)assocN:(NSInteger)i value:(id)val {
 	[self ensureEditable];
-	if (i >= 0 && i < _cnt) {
+	if (i >= 0 && i < _count) {
 		if (i >= self.tailoff) {
 			_tail.array[i & 0x01f] = val;
 			return self;
@@ -207,8 +208,9 @@
 		_root = [self doAssocAtLevel:_shift node:_root index:i value:val];
 		return self;
 	}
-	if (i == _cnt)
+	if (i == _count) {
 		return (id<CLJITransientVector>)[self conj:val];
+	}
 	[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	return nil;
 }
@@ -237,21 +239,21 @@
 
 - (id<CLJITransientVector>)pop {
 	[self ensureEditable];
-	if (_cnt == 0) {
+	if (_count == 0) {
 		[NSException raise:NSInternalInconsistencyException format:@"Can't pop from an empty vector"];
 	}
-	if (_cnt == 1) {
-		_cnt = 0;
+	if (_count == 1) {
+		_count = 0;
 		return self;
 	}
-	NSInteger i = _cnt - 1;
+	NSInteger i = _count - 1;
 	//pop in tail?
 	if ((i & 0x01f) > 0) {
-		--_cnt;
+		--_count;
 		return self;
 	}
 	
-	CLJArray newtail = [self editableArrayFor:_cnt - 2];
+	CLJArray newtail = [self editableArrayFor:_count - 2];
 	
 	CLJNode *newroot = [self popTailAtLevel:_shift node:_root];
 	NSInteger newshift = _shift;
@@ -264,14 +266,14 @@
 	}
 	_root = newroot;
 	_shift = newshift;
-	--_cnt;
+	--_count;
 	_tail = newtail;
 	return self;
 }
 
 - (CLJNode *)popTailAtLevel:(NSInteger)level node:(CLJNode *)node {
 	node = [self ensureEditableNode:node];
-	NSInteger subidx = ((_cnt - 2) >> level) & 0x01f;
+	NSInteger subidx = ((_count - 2) >> level) & 0x01f;
 	if (level > 5) {
 		CLJNode *newchild = [self popTailAtLevel:level - 5 node:(CLJNode *)node.array.array[subidx]];
 		if (newchild == nil && subidx == 0) {
