@@ -137,7 +137,7 @@
 	return [self.values containsObject:value];
 }
 
-- (id<CLJISet>)allValues {
+- (id<CLJISet>)allEntries {
 //	return new AbstractSet(){
 //		
 //		public Iterator iterator(){
