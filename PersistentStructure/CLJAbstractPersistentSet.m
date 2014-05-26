@@ -98,15 +98,6 @@
 	return [CLJUtils seqToArray:self.seq];
 }
 
-- (BOOL)containsAll:(id<CLJICollection>)c {
-	for (id o in c) {
-		if (![self containsObject:o]) {
-			return false;
-		}
-	}
-	return true;
-}
-
 - (BOOL)isEmpty {
 	return self.count == 0;
 }
