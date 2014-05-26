@@ -47,7 +47,7 @@
 	return nil;
 }
 
-- (id<CLJISeq>)rseq {
+- (id<CLJISeq>)reversedSeq {
 	if (self.count > 0) {
 		return [[CLJRVecSeq alloc] initWithVector:self index:self.count - 1];
 	}
@@ -76,7 +76,7 @@
 		}
 		id<CLJISeq> ms = [CLJUtils seq:obj];
 		for (NSInteger i = 0; i < v.count; i++, ms = ms.next) {
-			if (ms == nil || ![CLJUtils isEqual:[v nth:i] other:ms.first]) {
+			if (ms == nil || ![CLJUtils isEqual:[v objectAtIndex:i] other:ms.first]) {
 				return NO;
 			}
 		}
@@ -107,7 +107,7 @@
 		}
 		id<CLJISeq> ms = [CLJUtils seq:obj];
 		for (NSInteger i = 0; i < v.count; i++, ms = ms.next) {
-			if (ms == nil || ![CLJUtils equiv:(__bridge void *)([v nth:i]) other:(__bridge void *)(ms.first)]) {
+			if (ms == nil || ![CLJUtils equiv:(__bridge void *)([v objectAtIndex:i]) other:(__bridge void *)(ms.first)]) {
 				return NO;
 			}
 		}
@@ -153,19 +153,19 @@
 }
 
 - (id)get:(NSInteger)index {
-	return [self nth:index];
+	return [self objectAtIndex:index];
 }
 
-- (id)nth:(NSInteger)i default:(id)notFound {
+- (id)objectAtIndex:(NSInteger)i default:(id)notFound {
 	if (i >= 0 && i < self.count) {
-		return [self nth:i];
+		return [self objectAtIndex:i];
 	}
 	return notFound;
 }
 
 - (NSInteger)indexOf:(id)o {
 	for (NSInteger i = 0; i < self.count; i++) {
-		if ([CLJUtils equiv:(__bridge void *)([self nth:i]) other:(__bridge void *)(o)]) {
+		if ([CLJUtils equiv:(__bridge void *)([self objectAtIndex:i]) other:(__bridge void *)(o)]) {
 			return i;
 		}
 	}
@@ -174,7 +174,7 @@
 
 - (NSInteger)lastIndexOf:(id)o {
 	for (NSInteger i = self.count - 1; i >= 0; i--) {
-		if ([CLJUtils equiv:(__bridge void *)([self nth:i]) other:(__bridge void *)(o)]) {
+		if ([CLJUtils equiv:(__bridge void *)([self objectAtIndex:i]) other:(__bridge void *)(o)]) {
 			return i;
 		}
 	}
@@ -192,7 +192,7 @@
 
 - (id)peek {
 	if (self.count > 0) {
-		return [self nth:self.count - 1];
+		return [self objectAtIndex:self.count - 1];
 	}
 	return nil;
 }
@@ -209,7 +209,7 @@
 	if (![CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).integerValue;
 		if (i >= 0 && i < self.count) {
-			return [[CLJMapEntry alloc] initWithKey:key val:[self nth:i]];
+			return [[CLJMapEntry alloc] initWithKey:key val:[self objectAtIndex:i]];
 		}
 	}
 	return nil;
@@ -228,7 +228,7 @@
 	if ([CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).integerValue;
 		if (i >= 0 && i < self.count) {
-			return [self nth:i];
+			return [self objectAtIndex:i];
 		}
 	}
 	return notFound;
@@ -283,7 +283,7 @@
 	}
 	
 	for (NSInteger i = 0; i < self.count; i++) {
-		NSComparisonResult c = [CLJUtils compare:[self nth:i] to:[v nth:i]];
+		NSComparisonResult c = [CLJUtils compare:[self objectAtIndex:i] to:[v objectAtIndex:i]];
 		if (c != 0) {
 			return c;
 		}
@@ -309,7 +309,7 @@
 	return nil;
 }
 
-- (id)nth:(NSInteger)i {
+- (id)objectAtIndex:(NSInteger)i {
 	return nil;
 }
 

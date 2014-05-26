@@ -12,15 +12,16 @@
 
 @protocol CLJIMap <NSObject>
 
+- (id)objectForKey:(id)key;
+- (id)setObject:(id)val forKey:(id)key;;
+
 - (BOOL)containsKey:(id)key;
 - (BOOL)containsValue:(id)value;
-- (id<CLJISet> /*id<CLJIMapEntry>*/)entrySet;
+- (id<CLJISet> /*id<CLJIMapEntry>*/)allValues;
 - (BOOL)isEqual:(id)o;
-- (id)get:(id)key;
 - (BOOL)isEmpty;
-- (id<CLJISet>)keySet;
-- (id)put:(id) key with:(id)value;
-- (void)putAll:(id<CLJIMap>)m;
+- (id<CLJISet>)allKeys;
+
 - (NSUInteger)count;
 - (id<CLJICollection>)values;
 

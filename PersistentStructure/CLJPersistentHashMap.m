@@ -40,7 +40,7 @@ static id _CLJNOT_FOUND = nil;
 
 + (id<CLJIPersistentMap>)create:(id<CLJIMap>)other {
 	id<CLJITransientMap> ret = (id<CLJITransientMap>)_CLJEmptyPersistentHashMap.asTransient;
-	for (id o in other.entrySet) {
+	for (id o in other.allValues) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>) o;
 		ret = [ret associateKey:e.key value:e.val];
 	}

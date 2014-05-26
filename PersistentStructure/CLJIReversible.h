@@ -11,6 +11,6 @@
 
 @protocol CLJReversible <NSObject>
 
-- (id<CLJISeq>)rseq;
+- (id<CLJISeq>)reversedSeq;
 
 @end

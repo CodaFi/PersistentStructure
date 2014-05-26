@@ -142,7 +142,7 @@
 
 + (id)nthOf:(id)coll index:(NSInteger)n {
 	if ([coll conformsToProtocol:@protocol(CLJIIndexed)]) {
-		return [((id<CLJIIndexed>)coll) nth:n];
+		return [((id<CLJIIndexed>)coll) objectAtIndex:n];
 	}
 	return [CLJUtils nthFrom:[CLJUtils ret1s:coll null:nil] index:n];
 }

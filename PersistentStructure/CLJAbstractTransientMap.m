@@ -32,7 +32,7 @@
 		if (v.count != 2) {
 			[NSException raise:NSInvalidArgumentException format:@"Vector arg to map conj: must be a pair"];
 		}
-		return [self associateKey:[v nth:0] value:[v nth:1]];
+		return [self associateKey:[v objectAtIndex:0] value:[v objectAtIndex:1]];
 	}
 	
 	id<CLJITransientMap> ret = self;

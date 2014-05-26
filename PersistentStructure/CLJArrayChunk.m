@@ -34,13 +34,13 @@
 	return self;
 }
 
--(id)nth:(NSInteger)i {
+-(id)objectAtIndex:(NSInteger)i {
 	return _array.array[_off + i];
 }
 
-- (id)nth:(NSInteger)i default:(id)notFound {
+- (id)objectAtIndex:(NSInteger)i default:(id)notFound {
 	if (i >= 0 && i < self.count) {
-		return [self nth:i];
+		return [self objectAtIndex:i];
 	}
 	return notFound;
 }

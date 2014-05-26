@@ -40,11 +40,11 @@
 	return nil;
 }
 
-- (id)nth:(NSInteger)i {
+- (id)objectAtIndex:(NSInteger)i {
 	if ((_start + i >= _end) || (i < 0)) {
 		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	}
-	return [_v nth:_start + i];
+	return [_v objectAtIndex:_start + i];
 }
 
 - (id<CLJIPersistentVector>)assocN:(NSInteger)i value:(id)val {

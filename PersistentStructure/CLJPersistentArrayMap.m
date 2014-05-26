@@ -33,7 +33,7 @@ static CLJPersistentArrayMap *EMPTY;
 
 - (id)initWithMap:(id<CLJIMap>)other {
 	id<CLJITransientMap> ret = (id<CLJITransientMap> )EMPTY.asTransient;
-	for (id o in other.entrySet) {
+	for (id o in other.allValues) {
 		CLJMapEntry *e = (CLJMapEntry *) o;
 		ret = [ret associateKey:e.key value:e.val];
 	}

@@ -133,14 +133,14 @@ static CLJPersistentVector *EMPTY = nil;
 	return (CLJArray){};
 }
 
-- (id)nth:(NSInteger)i {
+- (id)objectAtIndex:(NSInteger)i {
 	CLJArray node = [self arrayFor:i];
 	return node.array[i & 0x01f];
 }
 
-- (id)nth:(NSInteger)i default:(id)notFound {
+- (id)objectAtIndex:(NSInteger)i default:(id)notFound {
 	if (i >= 0 && i < _count) {
-		return [self nth:i];
+		return [self objectAtIndex:i];
 	}
 	return notFound;
 }

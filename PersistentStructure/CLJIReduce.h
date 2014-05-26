@@ -9,7 +9,8 @@
 
 #include "CLJTypes.h"
 
-@protocol CLJIReduce <NSObject>
+@protocol CLJIReducible <NSObject>
+
 - (id)reduce:(CLJIReduceBlock)f;
 - (id)reduce:(CLJIReduceBlock)f start:(id)start;
 

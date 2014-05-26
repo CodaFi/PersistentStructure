@@ -13,7 +13,7 @@
 #import "CLJIList.h"
 #import "CLJICounted.h"
 
-@interface CLJPersistentList : CLJAbstractSeq <CLJIPersistentList, CLJIReduce, CLJIList, CLJICounted>
+@interface CLJPersistentList : CLJAbstractSeq <CLJIPersistentList, CLJIReducible, CLJIList, CLJICounted>
 
 + (id<CLJIPersistentCollection>)empty;
 - (id)initWithFirstObject:(id)first;

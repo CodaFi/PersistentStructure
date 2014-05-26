@@ -34,7 +34,7 @@
 }
 
 - (id)first {
-	return [_vector nth:_index];
+	return [_vector objectAtIndex:_index];
 }
 
 - (id<CLJISeq>)next {
@@ -56,17 +56,17 @@
 }
 
 - (id)reduce:(CLJIReduceBlock)f {
-	id ret = [_vector nth:_index];
+	id ret = [_vector objectAtIndex:_index];
 	for (NSInteger x = _index + 1; x < _vector.count; x++) {
-		ret = f(ret, [_vector nth:x]);
+		ret = f(ret, [_vector objectAtIndex:x]);
 	}
 	return ret;
 }
 
 - (id)reduce:(CLJIReduceBlock)f start:(id)start {
-	id ret = f(start, [_vector nth:_index]);
+	id ret = f(start, [_vector objectAtIndex:_index]);
 	for (NSInteger x = _index + 1; x < _vector.count; x++) {
-		ret = f(ret, [_vector nth:x]);
+		ret = f(ret, [_vector objectAtIndex:x]);
 	}
 	return ret;
 }

@@ -10,6 +10,6 @@
 #import "CLJICounted.h"
 
 @protocol CLJIIndexed <CLJICounted>
-- (id)nth:(NSInteger)i;
-- (id)nth:(NSInteger)i default:(id)notFound;
+- (id)objectAtIndex:(NSInteger)i;
+- (id)objectAtIndex:(NSInteger)i default:(id)notFound;
 @end

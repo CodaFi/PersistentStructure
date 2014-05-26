@@ -34,7 +34,7 @@
 }
 
 - (id)first {
-	return [_backingVector nth:_startingIndex];;
+	return [_backingVector objectAtIndex:_startingIndex];;
 }
 
 - (id<CLJISeq>)next {

@@ -13,7 +13,7 @@
 
 @implementation CLJAbstractMapEntry
 
-- (id)nth:(NSInteger)i {
+- (id)objectAtIndex:(NSInteger)i {
 	if (i == 0) {
 		return self.key;
 	} else if (i == 1) {

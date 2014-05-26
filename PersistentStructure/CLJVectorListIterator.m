@@ -23,7 +23,7 @@
 }
 
 - (id)nextObject {
-	return [_vec nth:_index++];
+	return [_vec objectAtIndex:_index++];
 }
 
 @end

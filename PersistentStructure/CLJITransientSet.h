@@ -14,6 +14,6 @@
 
 - (id<CLJITransientSet>)disjoin:(id)key;
 - (BOOL)containsObject:(id)key;
-- (id)get:(id)key;
+- (id)objectForKey:(id)key;
 
 @end

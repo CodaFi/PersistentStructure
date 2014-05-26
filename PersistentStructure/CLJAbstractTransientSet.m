@@ -41,7 +41,7 @@
 	return self;
 }
 
-- (id)get:(id)key {
+- (id)objectForKey:(id)key {
 	return [_impl objectForKey:key];
 }
 

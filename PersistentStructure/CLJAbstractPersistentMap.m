@@ -36,7 +36,7 @@
 		if (v.count != 2) {
 			NSAssert(0, @"Vector arg to map conj must be a pair");
 		}
-		return [self associateKey:[v nth:0] value:[v nth:1]];
+		return [self associateKey:[v objectAtIndex:0] value:[v objectAtIndex:1]];
 	}
 	id<CLJIPersistentMap> ret = self;
 	for (id<CLJISeq> es = [CLJUtils seq:o]; es != nil; es = es.next) {
@@ -65,7 +65,7 @@
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)s.first;
 		BOOL found = [m containsKey:e.key];
 		
-		if (!found || ![CLJUtils isEqual:e.val other:[m get:e.key]]) {
+		if (!found || ![CLJUtils isEqual:e.val other:[m objectForKey:e.key]]) {
 			return NO;
 		}
 	}
@@ -91,7 +91,7 @@
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)s.first;
 		BOOL found = [m containsKey:e.key];
 		
-		if (!found || ![CLJUtils equiv:(__bridge void *)(e.val) other:(__bridge void *)([m get:e.key])]) {
+		if (!found || ![CLJUtils equiv:(__bridge void *)(e.val) other:(__bridge void *)([m objectForKey:e.key])]) {
 			return NO;
 		}
 	}
@@ -137,7 +137,7 @@
 	return [self.values containsObject:value];
 }
 
-- (id<CLJISet>)entrySet {
+- (id<CLJISet>)allValues {
 //	return new AbstractSet(){
 //		
 //		public Iterator iterator(){
@@ -166,15 +166,11 @@
 	return nil;
 }
 
-- (id)get:(id)key {
-	return [self objectForKey:key];
-}
-
 - (BOOL)isEmpty {
 	return self.count == 0;
 }
 
-- (id<CLJISet>)keySet {
+- (id<CLJISet>)allKeys {
 //	return new AbstractSet(){
 //		
 //		public Iterator iterator(){
@@ -209,15 +205,10 @@
 	return nil;
 }
 
-- (id)put:(id)key with:(id)value {
+- (id)setObject:(id)val forKey:(id)key; {
 	CLJRequestConcreteImplementation(self, _cmd, Nil);
 	return nil;
 }
-
-- (void)putAll:(id<CLJIMap>)m {
-	CLJRequestConcreteImplementation(self, _cmd, Nil);
-}
-
 
 - (NSUInteger)count {
 	return self.count;

@@ -12,7 +12,7 @@
 #import "CLJIReduce.h"
 #import "CLJIPersistentVector.h"
 
-@interface CLJVecSeq : CLJAbstractSeq <CLJIIndexedSeq, CLJIReduce>
+@interface CLJVecSeq : CLJAbstractSeq <CLJIIndexedSeq, CLJIReducible>
 
 - (id)initWithVector:(id<CLJIPersistentVector>)v index:(NSInteger)i;
 - (id)initWithMeta:(id<CLJIPersistentMap>)meta vector:(id<CLJIPersistentVector>)v index:(NSInteger)i;
