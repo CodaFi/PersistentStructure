@@ -149,12 +149,8 @@ extern id<CLJIPersistentCollection> CLJOverloadable CLJAssoc(id<CLJIPersistentCo
 extern id<CLJIPersistentCollection> CLJOverloadable CLJAssoc(id<CLJIPersistentCollection> coll, id restrict ks, id restrict vs, ...) NS_REQUIRES_NIL_TERMINATION;
 
 /// Disj[oin]. Returns a new set of the same (hashed/sorted) type, that does not contain the given
-/// key.
-extern id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id key);
-
-/// Disj[oin]. Returns a new set of the same (hashed/sorted) type, that does not contain the given
 /// keys.
-extern id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id restrict vals, ...);
+extern id<CLJISet> CLJDisj(id<CLJISet> fromSet, id restrict vals, ...) NS_REQUIRES_NIL_TERMINATION;
 
 /// Returns the metadata of the provided object or collection.  If there is no metadata associated
 /// with the object, returns nil.
@@ -165,11 +161,11 @@ extern id<CLJIPersistentMap> CLJMetadata(id obj);
 extern id<CLJIObj> CLJWithMetadata(id<CLJIObj> obj, id<CLJIPersistentMap> m);
 
 
-extern id<CLJISeq> CLJReduce1(CLJIReduceBlock reducer, id<CLJISeqable> coll);
-extern id<CLJISeq> CLJReduce(CLJIReduceBlock reducer, id<CLJISeqable> coll, id val);
+extern id<CLJISeq> CLJReduce1(CLJIReduceBlock reducer, id coll);
+extern id<CLJISeq> CLJReduce(CLJIReduceBlock reducer, id coll, id val);
 
-extern id<CLJISeq> CLJReduce1f(CLJIReduceFunction reducer, id<CLJISeqable> coll);
-extern id<CLJISeq> CLJReducef(CLJIReduceFunction reducer, id<CLJISeqable> coll, id val);
+extern id<CLJISeq> CLJReduce1f(CLJIReduceFunction reducer, id coll);
+extern id<CLJISeq> CLJReducef(CLJIReduceFunction reducer, id coll, id val);
 
 #pragma mark - TBD
 

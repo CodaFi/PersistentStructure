@@ -1,5 +1,5 @@
 //
-//  CLJReversible.h
+//  CLJIReversible.h
 //  PersistentStructure
 //
 //  Created by Robert Widmann on 12/29/13.
@@ -9,7 +9,7 @@
 
 #import "CLJISeq.h"
 
-@protocol CLJReversible <NSObject>
+@protocol CLJIReversible <NSObject>
 
 - (id<CLJISeq>)reversedSeq;
 

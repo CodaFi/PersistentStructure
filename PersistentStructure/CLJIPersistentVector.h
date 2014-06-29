@@ -13,7 +13,7 @@
 #import "CLJIReversible.h"
 #import "CLJIIndexed.h"
 
-@protocol CLJIPersistentVector <CLJIAssociative, CLJISequential, CLJIPersistentStack, CLJReversible, CLJIIndexed>
+@protocol CLJIPersistentVector <CLJIAssociative, CLJISequential, CLJIPersistentStack, CLJIReversible, CLJIIndexed>
 
 - (id<CLJIPersistentVector>)assocN:(NSInteger)i value:(id)val;
 - (id<CLJIPersistentVector>)cons:(id)o;

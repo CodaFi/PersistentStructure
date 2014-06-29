@@ -22,6 +22,8 @@
 #import "CLJPersistentArrayMap.h"
 #import "CLJSubVector.h"
 #import "CLJMapEntry.h"
+#import "CLJKeySeq.h"
+#import "CLJValSeq.h"
 #import "CLJBox.h"
 
 @implementation CLJUtils
@@ -414,6 +416,18 @@
 		return [((id<CLJIComparable>) k1) compareTo:k2];
 	}
 	return -1;
+}
+
++ (id<CLJISeq>)keys:(id)coll {
+	return [CLJKeySeq create:[CLJUtils seq:coll]];
+}
+
++ (id<CLJISeq>)vals:(id)coll {
+	return [CLJValSeq create:[CLJUtils seq:coll]];
+}
+
++ (id<CLJISeq>)list:(id)arg1 {
+	return [[CLJPersistentList alloc] initWithFirstObject:arg1];
 }
 
 @end

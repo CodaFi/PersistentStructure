@@ -10,6 +10,7 @@
 #import "CLJPersistentTreeMap.h"
 
 @interface CLJPersistentTreeMap (CLJInternal)
+
 + (CLJRedTreeNode *)red:(id)key val:(id)val left:(CLJTreeNode *)left right:(CLJTreeNode *)right;
 + (CLJRedTreeNode *)black:(id)key val:(id)val left:(CLJTreeNode *)left right:(CLJTreeNode *)right;
 
@@ -273,8 +274,7 @@
 	self = [super initWithKey:key left:left right:right];
 	
 	_val = val;
-	
-	
+		
 	return self;
 }
 

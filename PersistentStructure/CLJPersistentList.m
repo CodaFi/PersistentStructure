@@ -260,5 +260,9 @@ static CLJEmptyList *_CLJSingletonEmptyList = nil;
 	return [CLJUtils nthOf:self index:index];
 }
 
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len {
+	return 0;
+}
+
 @end
 

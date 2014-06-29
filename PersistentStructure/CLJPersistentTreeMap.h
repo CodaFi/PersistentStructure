@@ -9,6 +9,14 @@
 #import "CLJAbstractPersistentMap.h"
 #import "CLJInterfaces.h"
 
-@interface CLJPersistentTreeMap : CLJAbstractPersistentMap <CLJIObj, CLJReversible, CLJISorted>
+@class CLJTreeNode;
+
+@interface CLJPersistentTreeMap : CLJAbstractPersistentMap <CLJIObj, CLJIReversible, CLJISorted>
+
+- (id)initWithMeta:(id<CLJIPersistentMap>)meta comparator:(CLJComparatorBlock)comp;
+- (id)initWithMeta:(id<CLJIPersistentMap>)meta comparator:(CLJComparatorBlock)comp tree:(CLJTreeNode *)tree count:(NSInteger)count;
+- (id)initWithComparator:(CLJComparatorBlock)comp tree:(CLJTreeNode *)tree count:(NSInteger)count meta:(id<CLJIPersistentMap>)meta;
+
++ (CLJPersistentTreeMap *)empty;
 
 @end

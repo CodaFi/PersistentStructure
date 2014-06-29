@@ -167,11 +167,7 @@ id<CLJITransientCollection> CLJCreateTransient(id<CLJIEditableCollection> coll) 
 	return [coll asTransient];
 }
 
-id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id key) {
-	return (id<CLJISet>)[(id<CLJIPersistentSet>)fromSet disjoin:key];
-}
-
-id<CLJISet> CLJOverloadable CLJDisj(id<CLJISet> fromSet, id restrict vals, ...) {
+id<CLJISet> CLJDisj(id<CLJISet> fromSet, id restrict vals, ...) {
 	va_list args;
 	va_start(args, vals);
 	id obj;
@@ -193,27 +189,27 @@ id<CLJIObj> CLJWithMetadata(id<CLJIObj> obj, id<CLJIPersistentMap> m) {
 	return [obj withMeta:m];
 }
 
-id<CLJISeq> CLJReduce1f(CLJIReduceFunction reducer, id<CLJISeqable> coll) {
+id<CLJISeq> CLJReduce1f(CLJIReduceFunction reducer, id coll) {
 	return CLJReduce1(^id(id a, id b) {
 		return reducer(a, b);
 	}, coll);
 }
 
-extern id<CLJISeq> CLJReducef(CLJIReduceFunction reducer, id<CLJISeqable> coll, id val) {
+extern id<CLJISeq> CLJReducef(CLJIReduceFunction reducer, id coll, id val) {
 	return CLJReduce(^id(id a, id b) {
 		return reducer(a, b);
 	}, coll, val);
 }
 
-id<CLJISeq> CLJReduce1(CLJIReduceBlock reducer, id<CLJISeqable> coll) {
+id<CLJISeq> CLJReduce1(CLJIReduceBlock reducer, id coll) {
 	return nil;
 }
 
-id<CLJISeq> CLJReduce(CLJIReduceBlock reducer, id<CLJISeqable> coll, id val) {
+id<CLJISeq> CLJReduce(CLJIReduceBlock reducer, id coll, id val) {
 	return nil;
 }
 
-id<CLJISeq> seq_reduce(CLJIReduceBlock f, id<CLJISeqable> coll) {
+id<CLJISeq> seq_reduce(CLJIReduceBlock f, id coll) {
 	return nil;
 }
 

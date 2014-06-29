@@ -7,11 +7,8 @@
 //  Released under the MIT license.
 //
 
-#import "CLJIPersistentVector.h"
-#import "CLJIList.h"
-#import "CLJIComparable.h"
-#import "CLJIHashEq.h"
+#import "CLJInterfaces.h"
 
-@interface CLJAbstractPersistentVector : NSObject <CLJIPersistentVector, NSFastEnumeration, CLJIList, /*RandomAccess,*/ CLJIComparable, CLJIHashEq>
+@interface CLJAbstractPersistentVector : NSObject <CLJIPersistentVector, NSFastEnumeration, CLJIList, CLJIRandom, CLJIComparable, CLJIHashEq>
 
 @end

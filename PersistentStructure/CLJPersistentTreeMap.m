@@ -33,6 +33,10 @@ static CLJPersistentTreeMap *EMPTY;
 	return ret;
 }
 
++ (CLJPersistentTreeMap *)empty {
+	return EMPTY;
+}
+
 //public PersistentTreeMap(){
 //	this(RT.DEFAULT_COMPARATOR);
 //}

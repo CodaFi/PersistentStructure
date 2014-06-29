@@ -25,6 +25,7 @@
 @implementation CLJAbstractSeq {
 	NSInteger _hash;
 	NSInteger _hasheq;
+	CLJSeqIterator *_it;
 }
 
 - (id)init {
@@ -222,7 +223,10 @@
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id [])buffer count:(NSUInteger)len {
-	return 0;
+	if (!_it) {
+		_it = [[CLJSeqIterator alloc] initWithSeq:self];
+	}
+	return [_it countByEnumeratingWithState:state objects:buffer count:len];
 }
 
 @end

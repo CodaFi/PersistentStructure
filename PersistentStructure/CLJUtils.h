@@ -7,6 +7,7 @@
 //  Released under the MIT license.
 //
 
+#import "CLJMurmur3.h"
 #import "CLJArray.h"
 #import "CLJInterfaces.h"
 
@@ -55,4 +56,10 @@
 + (id<CLJINode>)createNodeOnThread:(NSThread *)edit shift:(NSInteger)shift key:(id)key1 value:(id)val1 hash:(NSInteger)key2hash key:(id)key2 value:(id)val2;
 
 + (NSComparisonResult)compare:(id)k1 to:(id)k2;
+
++ (id<CLJISeq>)keys:(id)coll;
++ (id<CLJISeq>)vals:(id)coll;
+
++ (id<CLJISeq>)list:(id)arg1;
+
 @end
