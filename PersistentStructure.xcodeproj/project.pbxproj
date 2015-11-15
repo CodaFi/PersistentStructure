@@ -528,13 +528,6 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		847C07B318E527DD008F027F /* Foundation Support */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Foundation Support";
-			sourceTree = "<group>";
-		};
 		847C07B418E52819008F027F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,7 +632,6 @@
 			children = (
 				C931B7201871453500CFC336 /* PersistentStructure.h */,
 				847C07B218E527D5008F027F /* Core */,
-				847C07B318E527DD008F027F /* Foundation Support */,
 				C931B71E1871453500CFC336 /* Supporting Files */,
 			);
 			path = PersistentStructure;
@@ -888,7 +880,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = CLJ;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = CodaFi;
 			};
 			buildConfigurationList = C931B70F1871453500CFC336 /* Build configuration list for PBXProject "PersistentStructure" */;
@@ -1122,6 +1114,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -1177,6 +1170,7 @@
 		C931B7391871453500CFC336 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PersistentStructure/PersistentStructure-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1186,6 +1180,7 @@
 		C931B73A1871453500CFC336 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PersistentStructure/PersistentStructure-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1207,6 +1202,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "PersistentStructureTests/PersistentStructureTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "CodaFi.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1223,6 +1219,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PersistentStructureTests/PersistentStructureTests-Prefix.pch";
 				INFOPLIST_FILE = "PersistentStructureTests/PersistentStructureTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "CodaFi.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
