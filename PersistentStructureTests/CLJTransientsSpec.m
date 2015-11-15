@@ -9,10 +9,14 @@
 
 CLJTestBegin(CLJTransients)
 
+- (void)testDissocing {
+	
+}
+
 - (void)testEmptyTransient {
 	XCTAssertFalse(CLJContains(
 						CLJCreateTransient(
-							CLJCreateHashMap(nil)), @"bogus-key"),
+							CLJCreateHashSet(nil)), @"bogus-key"),
 								@"");
 }
 
