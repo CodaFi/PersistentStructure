@@ -58,8 +58,10 @@
 
 - (id)reduce:(CLJIReduceBlock)f start:(id)start {
 	id ret = f(start, _array.array[_off]);
-	if ([CLJUtils isReduced:ret])
+	if ([CLJUtils isReduced:ret]) {
 		return ret;
+	}
+	
 	for (NSInteger x = _off + 1; x < _end; x++) {
 		ret = f(ret, _array.array[x]);
 		if ([CLJUtils isReduced:ret]) {

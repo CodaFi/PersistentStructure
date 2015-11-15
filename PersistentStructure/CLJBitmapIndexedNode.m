@@ -144,8 +144,9 @@ static CLJBitmapIndexedNode *EMPTY;
 
 - (id)findWithShift:(NSInteger)shift hash:(NSInteger)hash key:(id)key notFound:(id)notFound {
 	NSInteger bit = [CLJUtils bitPos:hash shift:shift];
-	if ((_bitmap & bit) == 0)
+	if ((_bitmap & bit) == 0) {
 		return notFound;
+	}
 	NSInteger idx = [self index:bit];
 	id keyOrNull = _array.array[2 * idx];
 	id valOrNode = _array.array[2 * idx+1];

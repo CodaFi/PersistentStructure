@@ -238,9 +238,9 @@
 }
 
 - (CLJTreeNode *)balanceLeft:(CLJTreeNode *)parent {
-	if([_left isKindOfClass:CLJRedTreeNode.class]) {
+	if ([_left isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:_key val:self.val left:_left.blacken right:[CLJPersistentTreeMap black:parent.key val:parent.val left:_right right:parent.right]];
-	} else if([_right isKindOfClass:CLJRedTreeNode.class]) {
+	} else if ([_right isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:_right.key val:_right.val left:_right.left right:[CLJPersistentTreeMap black:parent.key val:parent.val left:_right.right right:parent.right]];
 	} else {
 		return [super balanceLeft:parent];
@@ -249,9 +249,9 @@
 }
 
 - (CLJTreeNode *)balanceRight:(CLJTreeNode *)parent  {
-	if([_right isKindOfClass:CLJRedTreeNode.class]) {
+	if ([_right isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:_key val:self.val left:[CLJPersistentTreeMap black:parent.key val:parent.val left:parent.left right:_left] right:_right.blacken];
-	} else if([_left isKindOfClass:CLJRedTreeNode.class]) {
+	} else if ([_left isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:_left.key val:_left.val
 									left:[CLJPersistentTreeMap black:parent.key val:parent.val left:parent.left right:_left.left]
 								   right:[CLJPersistentTreeMap black:_key val:self.val left:_left.right right:_right]];

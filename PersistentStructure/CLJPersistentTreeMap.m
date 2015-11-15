@@ -87,7 +87,7 @@ static CLJPersistentTreeMap *EMPTY;
 + (id)createWithSeq:(id<CLJISeq>)items {
 	id<CLJIPersistentMap> ret = EMPTY;
 	for(; items != nil; items = items.next.next) {
-		if(items.next == nil) {
+		if (items.next == nil) {
 			NSAssert(0, @"No value supplied for key: %@", items.first);
 		}
 		ret = [ret associateKey:items.first value:[CLJUtils second:items]];
@@ -98,7 +98,7 @@ static CLJPersistentTreeMap *EMPTY;
 + (id)createWithComparator:(CLJComparatorBlock)comp seq:(id<CLJISeq>)items {
 	id<CLJIPersistentMap> ret = [[CLJPersistentTreeMap alloc] initWithComparator:comp];
 	for(; items != nil; items = items.next.next) {
-		if(items.next == nil) {
+		if (items.next == nil) {
 			NSAssert(0, @"No value supplied for key: %@", items.first);
 		}
 		ret = [ret associateKey:items.first value:[CLJUtils second:items]];
@@ -113,7 +113,7 @@ static CLJPersistentTreeMap *EMPTY;
 - (id<CLJIPersistentMap>)assocEx:(id)key value:(id)val {
 	CLJBox *found = [CLJBox boxWithVal:nil];
 	CLJTreeNode *t = [self add:_tree key:key val:val found:found];
-	if(t == nil) {  //nil == already contains key
+	if (t == nil) {  //nil == already contains key
 		NSAssert(0, @"Key already present");
 	}
 	return [[CLJPersistentTreeMap alloc] initWithMeta:self.meta comparator:_comp tree:t.blacken count:_count + 1];
@@ -122,9 +122,9 @@ static CLJPersistentTreeMap *EMPTY;
 - (id<CLJIPersistentMap>)associateKey:(id)key value:(id)val {
 	CLJBox *found = [CLJBox boxWithVal:nil];
 	CLJTreeNode *t = [self add:_tree key:key val:val found:found];
-	if(t == nil) {  //nil == already contains key
+	if (t == nil) {  //nil == already contains key
 		CLJTreeNode *foundNode = (CLJTreeNode *) found.val;
-		if(foundNode.val == val)  //note only get same collection on identity of val, not equals()
+		if (foundNode.val == val)  //note only get same collection on identity of val, not equals()
 			return self;
 		return [[CLJPersistentTreeMap alloc] initWithMeta:self.meta comparator:_comp tree:[self replace:_tree key:key val:val] count:_count + 1];
 	}
@@ -135,8 +135,8 @@ static CLJPersistentTreeMap *EMPTY;
 - (id<CLJIPersistentMap>)without:(id)key {
 	CLJBox *found = [CLJBox boxWithVal:nil];
 	CLJTreeNode *t = [self remove:_tree key:key found:found];
-	if(t == nil) {
-		if(found.val == nil) { //nil == doesn't contain key
+	if (t == nil) {
+		if (found.val == nil) { //nil == doesn't contain key
 			return self;
 		}
 		//empty
@@ -146,7 +146,7 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 - (id<CLJISeq>)seq {
-	if(_count > 0) {
+	if (_count > 0) {
 		return [CLJSortedTreeSeq createWithRoot:_tree ascending:true count:_count];
 	}
 	return nil;
@@ -157,7 +157,7 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 - (id<CLJISeq>)reversedSeq {
-	if(_count > 0) {
+	if (_count > 0) {
 		return [CLJSortedTreeSeq createWithRoot:_tree ascending:false count:_count];
 	}
 	return nil;
@@ -172,30 +172,29 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 - (id<CLJISeq>)seq:(BOOL)ascending {
-	if(_count > 0) {
+	if (_count > 0) {
 		return [CLJSortedTreeSeq createWithRoot:_tree ascending:ascending count:_count];
 	}
 	return nil;
 }
 
 - (id<CLJISeq>)seqFrom:(id)key ascending:(BOOL)ascending {
-	if(_count > 0) {
+	if (_count > 0) {
 		id<CLJISeq> stack = nil;
 		CLJTreeNode *t = _tree;
 		while(t != nil) {
 			int c = [self doCompare:key :t.key];
-			if(c == 0) {
+			if (c == 0) {
 				stack = [CLJUtils cons:t to:stack];
 				return [[CLJSortedTreeSeq alloc] initWithStack:stack ascending:ascending];
-			} else if(ascending) {
-				if(c < 0) {
+			} else if (ascending) {
+				if (c < 0) {
 					stack = [CLJUtils cons:t to:stack];
 					t = t.left;
-				}
-				else
+				} else
 					t = t.right;
 			} else {
-				if(c > 0) {
+				if (c > 0) {
 					stack = [CLJUtils cons:t to:stack];
 					t = t.right;
 				} else {
@@ -203,7 +202,7 @@ static CLJPersistentTreeMap *EMPTY;
 				}
 			}
 		}
-		if(stack != nil) {
+		if (stack != nil) {
 			return [[CLJSortedTreeSeq alloc] initWithStack:stack ascending:ascending];
 		}
 	}
@@ -215,9 +214,9 @@ static CLJPersistentTreeMap *EMPTY;
 //}
 
 //public Object kvreduce(IFn f, Object init){
-//    if(tree != nil)
+//    if (tree != nil)
 //        init = tree.kvreduce(f,init);
-//    if(RT.isReduced(init))
+//    if (RT.isReduced(init))
 //        init = ((IDeref)init).deref();
 //    return init;
 //}
@@ -250,7 +249,7 @@ static CLJPersistentTreeMap *EMPTY;
 
 - (CLJTreeNode *)min {
 	CLJTreeNode *t = _tree;
-	if(t != nil) {
+	if (t != nil) {
 		while (t.left != nil) {
 			t = t.left;
 		}
@@ -265,7 +264,7 @@ static CLJPersistentTreeMap *EMPTY;
 
 - (CLJTreeNode *)max {
 	CLJTreeNode *t = _tree;
-	if(t != nil) {
+	if (t != nil) {
 		while (t.right != nil) {
 			t = t.right;
 		}
@@ -278,7 +277,7 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 - (int)depth:(CLJTreeNode *)t {
-	if(t == nil) {
+	if (t == nil) {
 		return 0;
 	}
 	return 1 + MAX([self depth:t.left], [self depth:t.right]);
@@ -305,9 +304,9 @@ static CLJPersistentTreeMap *EMPTY;
 	CLJTreeNode *t = _tree;
 	while(t != nil) {
 		int c = [self doCompare:aKey :t.key];
-		if(c == 0) {
+		if (c == 0) {
 			return t;
-		} else if(c < 0) {
+		} else if (c < 0) {
 			t = t.left;
 		} else {
 			t = t.right;
@@ -317,54 +316,54 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 - (NSComparisonResult)doCompare:(id)k1 :(id)k2 {
-	//	if(comp != nil)
+	//	if (comp != nil)
 	return _comp(k1, k2);
 	//	return ((Comparable) k1).compareTo(k2);
 }
 
 - (CLJTreeNode *)add:(CLJTreeNode *)t key:(id)key val:(id)val found:(CLJBox *)found {
-	if(t == nil) {
-		if(val == nil) {
+	if (t == nil) {
+		if (val == nil) {
 			return [[CLJRedTreeNode alloc] initWithKey:key];
 		}
 		return [[CLJRedTreeValue alloc] initWithKey:key val:val];
 	}
 	int c = [self doCompare:key :t.key];
-	if(c == 0) {
+	if (c == 0) {
 		found.val = t;
 		return nil;
 	}
 	CLJTreeNode *ins = c < 0 ? [self add:t.left key:key val:val found:found] : [self add:t.right key:key val:val found:found];
-	if(ins == nil) {//found below
+	if (ins == nil) {//found below
 		return nil;
 	}
-	if(c < 0) {
+	if (c < 0) {
 		return [t addLeft:ins];
 	}
 	return [t addRight:ins];
 }
 
 - (CLJTreeNode *)remove:(CLJTreeNode *)t key:(id)key found:(CLJBox *)found {
-	if(t == nil) {
+	if (t == nil) {
 		return nil; //not found indicator
 	}
 	int c = [self doCompare:key :t.key];
-	if(c == 0) {
+	if (c == 0) {
 		found.val = t;
 		return [CLJPersistentTreeMap append:t.left :t.right];
 	}
 	CLJTreeNode *del = c < 0 ? [self remove:t.left key:key found:found] : [self remove:t.right key:key found:found];
-	if(del == nil && found.val == nil) {//not found below
+	if (del == nil && found.val == nil) {//not found below
 		return nil;
 	}
-	if(c < 0) {
-		if([t.left isKindOfClass:CLJBlackTreeNode.class]) {
+	if (c < 0) {
+		if ([t.left isKindOfClass:CLJBlackTreeNode.class]) {
 			return [CLJPersistentTreeMap balanceLeftDel:t.key val:t.val del:del right:t.right];
 		} else {
 			return [CLJPersistentTreeMap red:t.key val:t.val left:del right:t.right];
 		}
 	}
-	if([t.right isKindOfClass:CLJBlackTreeNode.class]) {
+	if ([t.right isKindOfClass:CLJBlackTreeNode.class]) {
 		return [CLJPersistentTreeMap balanceRightDel:t.key val:t.val del:del left:t.left];
 	}
 	return [CLJPersistentTreeMap red:t.key val:t.val left:t.left right:del];
@@ -373,14 +372,14 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 + (CLJTreeNode *)append:(CLJTreeNode *)left :(CLJTreeNode *)right {
-	if(left == nil)
+	if (left == nil)
 		return right;
-	else if(right == nil) {
+	else if (right == nil) {
 		return left;
-	} else if([left isKindOfClass:CLJRedTreeNode.class]) {
-		if([right isKindOfClass:CLJRedTreeNode.class]) {
+	} else if ([left isKindOfClass:CLJRedTreeNode.class]) {
+		if ([right isKindOfClass:CLJRedTreeNode.class]) {
 			CLJTreeNode *app = [CLJPersistentTreeMap append:left.right :right.left];
-			if([app isKindOfClass:CLJRedTreeNode.class]) {
+			if ([app isKindOfClass:CLJRedTreeNode.class]) {
 				return [CLJPersistentTreeMap red:app.key val:app.val
 											left:[CLJPersistentTreeMap red:left.key val:left.val left:left.left right:app.left]
 										   right:[CLJPersistentTreeMap red:right.key val:right.val left:app.right right:right.right]];
@@ -390,12 +389,12 @@ static CLJPersistentTreeMap *EMPTY;
 		} else {
 			return [CLJPersistentTreeMap red:left.key val:left.val left:left.left right:[CLJPersistentTreeMap append:left.right :right]];
 		}
-	} else if([right isKindOfClass:CLJRedTreeNode.class]) {
+	} else if ([right isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:right.key val:right.val
 									left:[CLJPersistentTreeMap append:left :right.left] right:right.right];
 	} else { //black/black
 		CLJTreeNode *app = [CLJPersistentTreeMap append:left.right :right.left];
-		if([app isKindOfClass:CLJRedTreeNode.class]) {
+		if ([app isKindOfClass:CLJRedTreeNode.class]) {
 			return [CLJPersistentTreeMap red:app.key val:app.val
 										left:[CLJPersistentTreeMap black:left.key val:left.val left:left.left right:app.left]
 									   right:[CLJPersistentTreeMap black:right.key val:right.val left:app.right right:right.right]];
@@ -406,11 +405,11 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 + (CLJTreeNode *)balanceLeftDel:(id)key val:(id)val del:(CLJTreeNode *)del right:(CLJTreeNode *)right {
-	if([del isKindOfClass:CLJRedTreeNode.class]) {
+	if ([del isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:key val:val left:del.blacken right:right];
-	} else if([right isKindOfClass:CLJBlackTreeNode.class]) {
+	} else if ([right isKindOfClass:CLJBlackTreeNode.class]) {
 		return [CLJPersistentTreeMap rightBalance:key val:val left:del ins:right.redden];
-	} else if([right isKindOfClass:CLJRedTreeNode.class] && [right.left isKindOfClass:CLJBlackTreeNode.class]) {
+	} else if ([right isKindOfClass:CLJRedTreeNode.class] && [right.left isKindOfClass:CLJBlackTreeNode.class]) {
 		return [CLJPersistentTreeMap red:right.left.key val:right.left.val
 									left:[CLJPersistentTreeMap black:key val:val left:del right:right.left.left]
 								   right:[CLJPersistentTreeMap rightBalance:right.key val:right.val left:right.left.right ins:right.right.redden]];
@@ -421,11 +420,11 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 + (CLJTreeNode *)balanceRightDel:(id)key val:(id)val del:(CLJTreeNode *)del left:(CLJTreeNode *)left {
-	if([del isKindOfClass:CLJRedTreeNode.class]) {
+	if ([del isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:key val:val left:left right:del.blacken];
-	} else if([left isKindOfClass:CLJBlackTreeNode.class]) {
+	} else if ([left isKindOfClass:CLJBlackTreeNode.class]) {
 		return [CLJPersistentTreeMap leftBalance:key val:val ins:left.redden right:del];
-	} else if([left isKindOfClass:CLJRedTreeNode.class] && [left.right isKindOfClass:CLJBlackTreeNode.class]) {
+	} else if ([left isKindOfClass:CLJRedTreeNode.class] && [left.right isKindOfClass:CLJBlackTreeNode.class]) {
 		return [CLJPersistentTreeMap red:left.right.key val:left.right.val
 									left:[CLJPersistentTreeMap leftBalance:left.key val:left.val ins:left.left.redden right:left.right.left]
 								   right:[CLJPersistentTreeMap black:key val:val left:left.right.right right:del]];
@@ -436,9 +435,9 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 + (CLJTreeNode *)leftBalance:(id)key val:(id)val ins:(CLJTreeNode *)ins right:(CLJTreeNode *)right {
-	if([ins isKindOfClass:CLJRedTreeNode.class] && [ins.left isKindOfClass:CLJRedTreeNode.class]) {
+	if ([ins isKindOfClass:CLJRedTreeNode.class] && [ins.left isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:ins.key val:ins.val left:ins.left.blacken right:[CLJPersistentTreeMap black:key val:val left:ins.right right:right]];
-	} else if([ins isKindOfClass:CLJRedTreeNode.class] && [ins.right isKindOfClass:CLJRedTreeNode.class]) {
+	} else if ([ins isKindOfClass:CLJRedTreeNode.class] && [ins.right isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:ins.right.key val:ins.right.val
 									left:[CLJPersistentTreeMap black:ins.key val:ins.val left:ins.left right:ins.right.left]
 								   right:[CLJPersistentTreeMap black:key val:val left:ins.right.right right:right]];
@@ -449,11 +448,11 @@ static CLJPersistentTreeMap *EMPTY;
 
 
 + (CLJTreeNode *)rightBalance:(id)key val:(id)val left:(CLJTreeNode *)left ins:(CLJTreeNode *)ins {
-	if([ins isKindOfClass:CLJRedTreeNode.class] && [ins.right isKindOfClass:CLJRedTreeNode.class]) {
+	if ([ins isKindOfClass:CLJRedTreeNode.class] && [ins.right isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:ins.key val:ins.val
 									left:[CLJPersistentTreeMap black:key val:val left:left right:ins.left]
 								   right:ins.right.blacken];
-	} else if([ins isKindOfClass:CLJRedTreeNode.class] && [ins.left isKindOfClass:CLJRedTreeNode.class]) {
+	} else if ([ins isKindOfClass:CLJRedTreeNode.class] && [ins.left isKindOfClass:CLJRedTreeNode.class]) {
 		return [CLJPersistentTreeMap red:ins.left.key val:ins.left.val
 									left:[CLJPersistentTreeMap black:key val:val left:left right:ins.left.left]
 								   right:[CLJPersistentTreeMap black:ins.key val:ins.val left:ins.left.right right:ins.left.val]];
@@ -471,26 +470,26 @@ static CLJPersistentTreeMap *EMPTY;
 }
 
 + (CLJRedTreeNode *)red:(id)key val:(id)val left:(CLJTreeNode *)left right:(CLJTreeNode *)right {
-	if(left == nil && right == nil) {
-		if(val == nil) {
+	if (left == nil && right == nil) {
+		if (val == nil) {
 			return [[CLJRedTreeNode alloc] initWithKey:key];
 		}
 		return [[CLJRedTreeValue alloc] initWithKey:key val:val];
 	}
-	if(val == nil) {
+	if (val == nil) {
 		return [[CLJRedTreeBranch alloc] initWithKey:key left:left right:right];
 	}
 	return [[CLJRedTreeBranchValue alloc] initWithKey:key val:val left:left right:right];
 }
 
 + (CLJBlackTreeNode *)black:(id)key val:(id)val left:(CLJTreeNode *)left right:(CLJTreeNode *)right {
-	if(left == nil && right == nil) {
-		if(val == nil) {
+	if (left == nil && right == nil) {
+		if (val == nil) {
 			return [[CLJBlackTreeNode alloc] initWithKey:key];
 		}
 		return [[CLJBlackTreeValue alloc] initWithKey:key val:val];
 	}
-	if(val == nil) {
+	if (val == nil) {
 		return [[CLJBlackTreeBranch alloc] initWithKey:key left:left right:right];
 	}
 	return [[CLJBlackTreeBranchValue alloc] initWithKey:key val:val left:left right:right];
@@ -577,7 +576,7 @@ static CLJPersistentTreeMap *EMPTY;
 
 /*
  static public void main(String args[]){
- if(args.length != 1)
+ if (args.length != 1)
  System.err.println("Usage: RBTree n");
  int n = Integer.parseInt(args[0]);
  Integer[] ints = new Integer[n];
@@ -620,9 +619,9 @@ static CLJPersistentTreeMap *EMPTY;
  for(Object aSet : set)
  {
  IMapEntry o = (IMapEntry) aSet;
- if(!set.contains(o.key()))
+ if (!set.contains(o.key()))
  System.err.println("Can't find: " + o.key());
- //else if(n < 2000)
+ //else if (n < 2000)
  //	System.out.print(o.key().toString() + ",");
  }
  
@@ -655,9 +654,9 @@ static CLJPersistentTreeMap *EMPTY;
  for(Object o1 : ht.entrySet())
  {
  Map.Entry o = (Map.Entry) o1;
- if(!ht.containsKey(o.getKey()))
+ if (!ht.containsKey(o.getKey()))
  System.err.println("Can't find: " + o);
- //else if(n < 2000)
+ //else if (n < 2000)
  //	System.out.print(o.toString() + ",");
  }
  
@@ -676,7 +675,7 @@ static CLJPersistentTreeMap *EMPTY;
  int c = 0;
  for(Integer anInt : ints)
  {
- if(!set.contains(anInt))
+ if (!set.contains(anInt))
  ++c;
  }
  estimatedTime = System.nanoTime() - startTime;
@@ -687,7 +686,7 @@ static CLJPersistentTreeMap *EMPTY;
  c = 0;
  for(Integer anInt : ints)
  {
- if(!ht.containsKey(anInt))
+ if (!ht.containsKey(anInt))
  ++c;
  }
  estimatedTime = System.nanoTime() - startTime;

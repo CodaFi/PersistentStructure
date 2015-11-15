@@ -40,12 +40,12 @@ static CLJPersistentQueue *EMPTY;
 }
 
 - (BOOL)equiv:(id)obj {
-	if(![obj conformsToProtocol:@protocol(CLJISequential)]) {
+	if (![obj conformsToProtocol:@protocol(CLJISequential)]) {
 		return false;
 	}
 	id<CLJISeq> ms = [CLJUtils seq:obj];
 	for(id<CLJISeq> s = self.seq; s != nil; s = s.next, ms = ms.next) {
-		if(ms == nil || ![CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(ms.first)]) {
+		if (ms == nil || ![CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(ms.first)]) {
 			return false;
 		}
 	}
@@ -53,12 +53,12 @@ static CLJPersistentQueue *EMPTY;
 }
 
 - (BOOL)isEqual:(id)obj {
-	if(![obj conformsToProtocol:@protocol(CLJISequential)]) {
+	if (![obj conformsToProtocol:@protocol(CLJISequential)]) {
 		return false;
 	}
 	id<CLJISeq> ms = [CLJUtils seq:obj];
 	for(id<CLJISeq> s = self.seq; s != nil; s = s.next, ms = ms.next) {
-		if(ms == nil || ![CLJUtils isEqual:(__bridge id)((__bridge void *)(s.first)) other:(__bridge id)((__bridge void *)(ms.first))]) {
+		if (ms == nil || ![CLJUtils isEqual:(__bridge id)((__bridge void *)(s.first)) other:(__bridge id)((__bridge void *)(ms.first))]) {
 			return false;
 		}
 	}
@@ -66,7 +66,7 @@ static CLJPersistentQueue *EMPTY;
 }
 
 - (NSUInteger)hash {
-	if(_hash == -1) {
+	if (_hash == -1) {
 		NSUInteger hash = 1;
 		for(id<CLJISeq> s = self.seq; s != nil; s = s.next) {
 			hash = 31 * hash + (s.first == nil ? 0 : [s.first hash]);
@@ -77,7 +77,7 @@ static CLJPersistentQueue *EMPTY;
 }
 
 - (NSInteger)hasheq {
-	if(_hasheq == -1) {
+	if (_hasheq == -1) {
 		_hasheq = [CLJMurmur3 hashOrdered:self];
 	}
 	return _hasheq;
@@ -88,13 +88,13 @@ static CLJPersistentQueue *EMPTY;
 }
 
 - (id<CLJIPersistentStack>)pop {
-	if(_front == nil) { //hmmm... pop of empty queue -> empty queue?
+	if (_front == nil) { //hmmm... pop of empty queue -> empty queue?
 		return self;
 	}
 	//throw new IllegalStateException("popping empty queue");
 	id<CLJISeq> f1 = _front.next;
 	id<CLJIPersistentVector> r1 = _rear;
-	if(f1 == nil) {
+	if (f1 == nil) {
 		f1 = [CLJUtils seq:_rear];
 		r1 = nil;
 	}
@@ -106,14 +106,14 @@ static CLJPersistentQueue *EMPTY;
 }
 
 - (id<CLJISeq>)seq {
-	if(_front == nil) {
+	if (_front == nil) {
 		return nil;
 	}
 	return [[CLJQueueSeq alloc] initWithFirst:_front rev:[CLJUtils seq:_rear]];
 }
 
 - (id<CLJIPersistentCollection>)cons:(id)other {
-	if(_front == nil)  {   //empty
+	if (_front == nil)  {   //empty
 		return [[CLJPersistentQueue alloc] initWithMeta:self.meta count:_count + 1 seq:[CLJUtils list:other] rev:nil];
 	} else {
 		return [[CLJPersistentQueue alloc] initWithMeta:self.meta count:_count + 1 seq:_front rev:(_rear != nil ? _rear : [CLJPersistentVector.empty cons:other])];
@@ -138,7 +138,7 @@ static CLJPersistentQueue *EMPTY;
 
 - (BOOL)containsObject:(id)anObject {
 	for(id<CLJISeq> s = self.seq; s != nil; s = s.next) {
-		if([CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(anObject)]) {
+		if ([CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(anObject)]) {
 			return true;
 		}
 	}

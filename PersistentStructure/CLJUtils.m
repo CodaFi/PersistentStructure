@@ -101,8 +101,9 @@
 		o = nil;
 		NSInteger i = 0;
 		for (; s != nil; s = s.next) {
-			if ([s conformsToProtocol:@protocol(CLJICounted)])
+			if ([s conformsToProtocol:@protocol(CLJICounted)]) {
 				return i + s.count;
+			}
 			i++;
 		}
 		return i;
@@ -134,6 +135,8 @@
 	} else if ([coll conformsToProtocol:@protocol(CLJISet)]) {
 		id<CLJISet> s = (id<CLJISet>) coll;
 		return [s containsObject:key];
+	} else if ([coll conformsToProtocol:@protocol(CLJITransientSet)]) {
+		return [coll containsObject:key];
 	}
 //	else if (key instanceof Number && (coll instanceof String || coll.getClass().isArray())) {
 //		int n = ((Number) key).intValue();
@@ -151,7 +154,7 @@
 }
 
 + (id)nthOf:(id)coll index:(NSInteger)n notFound:(id)notFound {
-	if([coll conformsToProtocol:@protocol(CLJIIndexed)]) {
+	if ([coll conformsToProtocol:@protocol(CLJIIndexed)]) {
 		id<CLJIIndexed> v = (id<CLJIIndexed>)coll;
 		return [v objectAtIndex:n default:notFound];
 	}
@@ -177,8 +180,9 @@
 		id<CLJISeq> seq = [CLJUtils seq:coll];
 		coll = nil;
 		for (NSInteger i = 0; i <= n && seq != nil; i++, seq = seq.next) {
-			if (i == n)
+			if (i == n) {
 				return seq.first;
+			}
 		}
 		[NSException raise:NSRangeException format:@"Range or index out of bounds"];
 	} else {
@@ -188,23 +192,23 @@
 }
 
 + (id)nthFrom:(id)coll index:(NSInteger)n notFound:(id)notFound {
-	if(coll == nil) {
+	if (coll == nil) {
 		return notFound;
-	} else if(n < 0) {
+	} else if (n < 0) {
 		return notFound;
-	} else if([coll conformsToProtocol:@protocol(CLJIMapEntry)]) {
+	} else if ([coll conformsToProtocol:@protocol(CLJIMapEntry)]) {
 		id<CLJIMapEntry> e = (id<CLJIMapEntry>)coll;
-		if(n == 0) {
+		if (n == 0) {
 			return e.key;
-		} else if(n == 1) {
+		} else if (n == 1) {
 			return e.val;
 		}
 		return notFound;
-	} else if([coll conformsToProtocol:@protocol(CLJISequential)]) {
+	} else if ([coll conformsToProtocol:@protocol(CLJISequential)]) {
 		id<CLJISeq> seq = [CLJUtils seq:coll];
 		coll = nil;
 		for(int i = 0; i <= n && seq != nil; i++, seq = seq.next) {
-			if(i == n) {
+			if (i == n) {
 				return seq.first;
 			}
 		}

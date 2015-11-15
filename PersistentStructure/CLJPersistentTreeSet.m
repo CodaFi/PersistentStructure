@@ -50,14 +50,14 @@ static CLJPersistentTreeSet *EMPTY;
 }
 
 - (id<CLJIPersistentSet>)disjoin:(id)key {
-	if([self containsObject:key]) {
+	if ([self containsObject:key]) {
 		return [[CLJPersistentTreeSet alloc] initWithMeta:self.meta implementation:[_impl without:key]];
 	}
 	return self;
 }
 
 - (id<CLJIPersistentSet>)cons:(id)other {
-	if([self containsObject:other]) {
+	if ([self containsObject:other]) {
 		return self;
 	}
 	return [[CLJPersistentTreeSet alloc] initWithMeta:self.meta implementation:[_impl associateKey:other value:other]];

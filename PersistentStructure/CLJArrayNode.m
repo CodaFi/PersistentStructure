@@ -44,11 +44,13 @@
 - (id<CLJINode>)withoutWithShift:(NSInteger)shift hash:(NSInteger)hash key:(id)key {
 	NSInteger idx = [CLJUtils mask:hash shift:shift];
 	id<CLJINode> node = (id<CLJINode>)_array.array[idx];
-	if (node == nil)
+	if (node == nil) {
 		return self;
+	}
 	id<CLJINode> n = [node withoutWithShift:shift + 5 hash:hash key:key];
-	if (n == node)
+	if (n == node) {
 		return self;
+	}
 	if (n == nil) {
 		if (_count <= 8) { // shrink
 			return [self packOnThread:nil index:idx];

@@ -147,6 +147,7 @@
 	return s;
 }
 
+
 //final public ISeq rest(){
 //    Seqable m = more();
 //    if (m == null)

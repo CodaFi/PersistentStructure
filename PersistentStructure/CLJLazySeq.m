@@ -116,15 +116,17 @@
 
 - (NSUInteger)hash {
 	id<CLJISeq> s = self.seq;
-	if (s == nil)
+	if (s == nil) {
 		return 1;
+	}
 	return [CLJUtils hash:self.seq];;
 }
 
 - (NSInteger)hasheq {
 	id<CLJISeq> s = self.seq;
-	if (s == nil)
+	if (s == nil) {
 		return 1;
+	}
 	return [CLJUtils hasheq:self.seq];
 }
 
@@ -179,8 +181,9 @@
 - (NSInteger)indexOf:(id)o {
 	id<CLJISeq> s = self.seq;
 	for (NSInteger i = 0; s != nil; s = s.next, i++) {
-		if ([CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(o)])
+		if ([CLJUtils equiv:(__bridge void *)(s.first) other:(__bridge void *)(o)]) {
 			return i;
+		}
 	}
 	return NSNotFound;
 }

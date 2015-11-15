@@ -8,6 +8,7 @@
 //
 
 #import "CLJArray.h"
+#import "CLJICounted.h"
 
 /// The CLJICollection protocol declares the methods necessary for an object to call itself a
 /// collection.

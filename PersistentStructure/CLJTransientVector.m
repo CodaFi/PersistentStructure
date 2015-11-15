@@ -119,9 +119,7 @@
 	CLJNode *nodeToInsert;
 	if (level == 5) {
 		nodeToInsert = tailnode;
-	}
-	else
-	{
+	} else {
 		CLJNode *child = (CLJNode *) parent.array.array[subidx];
 		nodeToInsert = (child != nil) ? [self pushTailAtLevel:level - 5 parent:child tail:tailnode] : [CLJTransientVector newPath:_root.edit level:level - 5 node:tailnode];
 	}
@@ -130,8 +128,9 @@
 }
 
 + (CLJNode *)newPath:(NSThread *)edit level:(NSInteger)level node:(CLJNode *)node {
-	if (level == 0)
+	if (level == 0) {
 		return node;
+	}
 	CLJNode *ret = [[CLJNode alloc] initWithThread:edit];
 	ret.array.array[0] = [CLJTransientVector newPath:edit level:level - 5 node:node];
 	return ret;
@@ -146,8 +145,9 @@
 
 - (CLJArray)arrayFor:(NSInteger)i {
 	if (i >= 0 && i < _count) {
-		if (i >= self.tailoff)
+		if (i >= self.tailoff) {
 			return _tail;
+		}
 		CLJNode *node = _root;
 		for (NSInteger level = _shift; level > 0; level -= 5)
 			node = (CLJNode *)node.array.array[(i >> level) & 0x01f];
@@ -159,8 +159,9 @@
 
 - (CLJArray)editableArrayFor:(NSInteger)i {
 	if (i >= 0 && i < _count) {
-		if (i >= self.tailoff)
+		if (i >= self.tailoff) {
 			return _tail;
+		}
 		CLJNode *node = _root;
 		for (NSInteger level = _shift; level > 0; level -= 5)
 			node = (CLJNode *) node.array.array[(i >> level) & 0x01f];
@@ -179,8 +180,9 @@
 	[self ensureEditable];
 	if ([CLJUtils isInteger:key]) {
 		NSInteger i = ((NSNumber *) key).intValue;
-		if (i >= 0 && i < _count)
+		if (i >= 0 && i < _count) {
 			return [self objectAtIndex:i];
+		}
 	}
 	return notFound;
 }
@@ -192,8 +194,9 @@
 }
 
 - (id)objectAtIndex:(NSInteger)i default:(id)notFound {
-	if (i >= 0 && i < self.count)
+	if (i >= 0 && i < self.count) {
 		return [self objectAtIndex:i];
+	}
 	return notFound;
 }
 

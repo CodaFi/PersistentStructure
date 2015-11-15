@@ -102,8 +102,7 @@ static CLJPersistentArrayMap *EMPTY;
 	CLJArray newArray;
 	if (i >= 0) {
 		[NSException raise:NSInternalInconsistencyException format:@"Key %@ already present in array map %@", key, self];
-	}
-	else { //didn't have key, grow
+	} else { //didn't have key, grow
 		if (_array.length > HASHTABLE_THRESHOLD) {
 			return [[self createHT:_array] assocEx:key value:val];
 		}

@@ -38,8 +38,9 @@
 }
 
 - (id<CLJISeq>)next {
-	if (_index + 1 < _vector.count)
+	if (_index + 1 < _vector.count) {
 		return [[CLJVecSeq alloc] initWithVector:_vector index:_index + 1];
+	}
 	return nil;
 }
 

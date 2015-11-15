@@ -10,6 +10,7 @@
 @protocol CLJICollection;
 
 #import "CLJArray.h"
+#import "CLJICollection.h"
 
 @protocol CLJIList <CLJICollection>
 

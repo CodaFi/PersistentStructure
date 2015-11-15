@@ -65,14 +65,14 @@
 - (id<CLJISeq>)next {
 	CLJTreeNode *t = (CLJTreeNode *)_stack.first;
 	id<CLJISeq> nextstack = [CLJSortedTreeSeq pushNode:_asc ? t.right : t.left stack:_stack.next ascending:_asc];
-	if(nextstack != nil) {
+	if (nextstack != nil) {
 		return [[CLJSortedTreeSeq alloc] initWithStack:nextstack ascending:_asc count:_cnt - 1];
 	}
 	return nil;
 }
 
 - (NSUInteger)count {
-	if(_cnt < 0) {
+	if (_cnt < 0) {
 		return super.count;
 	}
 	return _cnt;
