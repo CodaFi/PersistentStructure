@@ -27,7 +27,7 @@
 }
 
 - (id)initWithArray:(CLJArray)array index:(NSInteger)index sequence:(id<CLJISeq>)seq {
-	if (_backingSeq != nil) {
+	if (seq != nil) {
 		return [[CLJNodeSeq alloc] initWithMeta:nil array:array index:index sequence:seq];
 	}
 	for (NSInteger j = index; j < array.length; j+=2) {
